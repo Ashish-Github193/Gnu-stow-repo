@@ -1,0 +1,42 @@
+[global_config]
+  window_state = fullscreen
+  borderless = True
+  tab_position = hidden
+  scroll_tabbar = True
+  homogeneous_tabbar = False
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
+  always_split_with_profile = True
+  title_use_system_font = False
+  title_font = JetBrainsMono Nerd Font Mono 9
+  invert_search = True
+[keybindings]
+  next_tab = <Primary><Alt>Page_Down
+  prev_tab = <Primary><Alt>Page_Up
+[profiles]
+  [[default]]
+    background_darkness = 1.0
+    cursor_color = "#aaaaaa"
+    font = JetBrains Mono 16
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_infinite = True
+    use_system_font = False
+  [[tokyonight]]
+    cursor_color = "#aaaaaa"
+    font = JetBrainsMono Nerd Font Mono 16
+    foreground_color = "#ffffff"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_infinite = True
+    custom_command = tmux -u
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = tokyonight
+[plugins]

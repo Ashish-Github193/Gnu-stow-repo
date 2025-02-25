@@ -1,0 +1,26 @@
+[general]
+import = [
+  "/home/x/.local/share/mise/installs/node/20.18.2/lib/node_modules/alacritty-themes/themes/Tokyonight_Night.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[scrolling]
+history = 10000  # More scrollback buffer
+
+[cursor]
+unfocused_hollow = true  # Make the cursor hollow when window is inactive
+blink_interval = 500  # Cursor blinks every 500ms
+
+[window]
+blur = true  # Blur background of transparent windows
+startup_mode = "Fullscreen"  # Start in fullscreen mode
+
+[font]
+size = 16.0
+normal = {family = "JetBrainsMono Nerd Font Mono", style = "Regular"}
+bold = {family = "JetBrains Mono Nerd Font Mono", style = "Bold"}
+italic = {family = "JetBrains Mono Nerd Font Mono", style = "Italic"}
+bold_italic = {family = "JetBrains Mono Nerd Font Mono", style = "Bold Italic"}
+

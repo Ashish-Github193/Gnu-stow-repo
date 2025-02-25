@@ -1,0 +1,54 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "inline_completions": {
+    "disabled_globs": [".env"]
+  },
+  "vim_mode": true,
+  "show_inline_completions": false,
+  "assistant": {
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-1.5-flash"
+    },
+    "version": "2"
+  },
+  "features": {
+    "inline_completion_provider": null
+  },
+  "ui_font_size": 20,
+  "buffer_font_size": 18,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Andromeda"
+  },
+  "terminal": {
+    "dock": "bottom",
+    // "font_family": "Roboto Mono Medium for Powerline"
+    "font_family": "JetBrains Mono"
+  },
+  "languages": {
+    "JavaScript": {
+      "show_inline_completions": true
+    },
+    "Python": {
+      "language_servers": ["basedpyright", "!pyright", "!pylsp"],
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "external": {
+            "command": "/home/linuxbrew/.linuxbrew/Cellar/black/24.10.0_1/bin/black",
+            "arguments": ["-"]
+          }
+        }
+      ]
+    }
+  }
+}
