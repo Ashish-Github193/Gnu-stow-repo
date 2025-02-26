@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "show_edit_predictions": true,
   "inline_completions": {
     "disabled_globs": [".env"]
   },
@@ -20,7 +21,7 @@
     "version": "2"
   },
   "features": {
-    "inline_completion_provider": null
+    "edit_prediction_provider": "zed"
   },
   "ui_font_size": 20,
   "buffer_font_size": 18,
