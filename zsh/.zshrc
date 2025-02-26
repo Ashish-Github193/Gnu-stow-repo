@@ -131,8 +131,8 @@ alias gc='git commit -m'
 alias gp='git push origin master'
 alias tmux='tmux -u'
 alias ls='exa --long'
-#alias nvim='$HOME/.local/bin/lvim'
-#alias lvim='$HOME/.local/bin/lvim'
+alias lg='lazygit'
+alias ld='lazydocker'
 
 export PATH=$HOME/.local/bin:$PATH
 
