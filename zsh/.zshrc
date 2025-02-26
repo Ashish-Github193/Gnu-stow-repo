@@ -162,8 +162,24 @@ ulimit -n 65536
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Cowsay something
-if command -v fortune &>/dev/null && command -v cowsay &>/dev/null; then
-    fortune | cowsay
-fi
 
+GNU_STOW_GIT_REPO_PATH=~/Projects/Gnu-stow-repo
+
+# Skip if git is not installed
+command -v git >/dev/null || return
+# Skip if repo path does not exist or is not a git repo
+[[ -d "$GNU_STOW_GIT_REPO_PATH/.git" ]] || return
+# Check for uncommitted changes
+if git -C "$GNU_STOW_GIT_REPO_PATH" diff --quiet && git -C "$GNU_STOW_GIT_REPO_PATH" diff --staged --quiet; then
+    # No uncommitted changes → Display a fortune message
+    if command -v fortune &>/dev/null && command -v cowsay &>/dev/null; then
+        fortune | cowsay
+    fi
+else
+    # Uncommitted changes exist → Display a funny warning
+    if command -v cowsay &>/dev/null; then
+        echo "\uf071 Your repo is a mess! Commit your changes!" | cowsay
+    else
+        echo "Uncommitted changes exist in $GNU_STOW_GIT_REPO_PATH"
+    fi
+fi
