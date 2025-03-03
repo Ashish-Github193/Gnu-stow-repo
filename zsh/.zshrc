@@ -184,3 +184,6 @@ else
         echo "Uncommitted changes exist in $GNU_STOW_GIT_REPO_PATH"
     fi
 fi
+
+# sources
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
