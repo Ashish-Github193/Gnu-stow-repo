@@ -12,6 +12,7 @@ history = 10000  # More scrollback buffer
 [cursor]
 unfocused_hollow = true  # Make the cursor hollow when window is inactive
 blink_interval = 500  # Cursor blinks every 500ms
+style = "Beam"
 
 [window]
 blur = true  # Blur background of transparent windows
