@@ -65,4 +65,5 @@ require("packer").startup(function(use)
       "rcarriga/nvim-notify", -- Fancy notifications (optional)
     },
   })
+  use("f-person/git-blame.nvim")
 end)
