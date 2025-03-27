@@ -15,7 +15,3 @@ vim.diagnostic.config({
   virtual_text = false,
   float = { "always" },
 })
-vim.g.gitblame_enabled = 1 -- Enable Git Blame by default
-vim.g.gitblame_message_template = " <author> • <date> • <summary>"
-vim.g.gitblame_display_virtual_text = 1 -- Show inline blame
-vim.g.gitblame_date_format = "%Y-%m-%d" -- Custom date format

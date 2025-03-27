@@ -1,6 +1,7 @@
 require("options")
 require("plugins")
 require("keymaps")
+require("pgitsigns")
 require("pnoice")
 require("pindent")
 require("highlights")

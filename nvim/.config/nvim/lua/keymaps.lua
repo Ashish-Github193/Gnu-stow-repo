@@ -36,7 +36,7 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { noremap = true, si
 vim.keymap.set("n", "<C-q>", "<Esc>:q<CR>", { noremap = true, silent = true })
 
 -- Keybinding to toggle Git Blame
-vim.api.nvim_set_keymap("n", "<leader>tb", ":GitBlameToggle<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>tb", ":GitBlameToggle<CR>", { noremap = true, silent = true })
 
 -- Undotree keybindings
 -- Toogle the Undotree

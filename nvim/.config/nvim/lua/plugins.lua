@@ -1,5 +1,6 @@
 require("packer").startup(function(use)
   use("wbthomason/packer.nvim") -- Package manager
+  use("lewis6991/gitsigns.nvim")
   use("nvim-treesitter/nvim-treesitter") -- Syntax highlighting
   use("tpope/vim-fugitive") -- Git commands in nvim
   use("neovim/nvim-lspconfig") -- LSP
@@ -65,5 +66,4 @@ require("packer").startup(function(use)
       "rcarriga/nvim-notify", -- Fancy notifications (optional)
     },
   })
-  use("f-person/git-blame.nvim")
 end)
