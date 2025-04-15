@@ -1,6 +1,5 @@
 require("packer").startup(function(use)
   use("wbthomason/packer.nvim") -- Package manager
-  use("lewis6991/gitsigns.nvim")
   use("nvim-treesitter/nvim-treesitter") -- Syntax highlighting
   use("tpope/vim-fugitive") -- Git commands in nvim
   use("neovim/nvim-lspconfig") -- LSP
@@ -12,15 +11,11 @@ require("packer").startup(function(use)
   use("mbbill/undotree")
   use({
     "supermaven-inc/supermaven-nvim", -- Maven support
-    config = function()
-      require("supermaven-nvim").setup({})
-    end,
+    config = true,
   })
   use({
     "windwp/nvim-autopairs", -- Autopairs
-    config = function()
-      require("nvim-autopairs").setup({})
-    end,
+    config = true,
   })
   use("L3MON4D3/LuaSnip") -- Snippets
   use("saadparwaiz1/cmp_luasnip") -- Snippets source for cmp
@@ -48,16 +43,12 @@ require("packer").startup(function(use)
       })
     end,
   })
-
   use({ "catppuccin/nvim", as = "catppuccin" }) -- Theme
   use({ "folke/tokyonight.nvim", as = "tokyonight" }) -- Theme
-
   use("stevearc/conform.nvim") -- Code formatter
   use({
     "brenoprata10/nvim-highlight-colors",
-    config = function()
-      require("nvim-highlight-colors").setup({})
-    end,
+    config = true,
   })
   use({
     "folke/noice.nvim",
@@ -65,5 +56,17 @@ require("packer").startup(function(use)
       "MunifTanjim/nui.nvim", -- UI components
       "rcarriga/nvim-notify", -- Fancy notifications (optional)
     },
+  })
+  use({ "lewis6991/gitsigns.nvim" })
+  use({
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  })
+  use({
+    "nvim-lualine/lualine.nvim",
+    requires = { "nvim-tree/nvim-web-devicons" },
   })
 end)

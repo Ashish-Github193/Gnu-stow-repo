@@ -2,7 +2,7 @@ require("mason").setup()
 
 local servers = {
   "ast_grep",
-  "basedpyright",
+  "pyright",
   "dockerls",
   "lua_ls",
   "tailwindcss",

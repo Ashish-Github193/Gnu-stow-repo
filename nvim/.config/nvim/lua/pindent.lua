@@ -22,5 +22,5 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 end)
 
 require("ibl").setup({
-  indent = { highlight = highlight, char = "•" },
+  indent = { highlight = highlight, char = " " },
 })

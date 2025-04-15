@@ -64,3 +64,8 @@ vim.api.nvim_set_keymap(
   ':lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
   { noremap = true, silent = true }
 )
+
+-- CodeCompanion keybindings
+vim.keymap.set("n", "<leader>c", ":CodeCompanion<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cc", ":CodeCompanionChat<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ca", ":CodeCompanionActions<CR>", { noremap = true, silent = true })

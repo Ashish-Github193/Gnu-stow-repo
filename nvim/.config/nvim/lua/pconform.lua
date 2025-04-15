@@ -2,14 +2,14 @@ require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "black", "isort" },
-    javascript = { "prettier_d_slim", "prettier", stop_after_first = true },
-    javascriptreact = { "prettier_d_slim", "prettier", stop_after_first = true },
+    javascript = { "prettier", stop_after_first = true },
+    javascriptreact = { "prettier", stop_after_first = true },
     typescriptreact = { "prettier_d_slim", "prettier", stop_after_first = true },
     typescript = { "prettier_d_slim", "prettier", stop_after_first = true },
     css = { "prettier_d_slim", "prettier" },
     scss = { "prettier_d_slim", "prettier" },
     markdown = { "prettier_d_slim", "prettier" },
-    html = { "prettier_d_slim", "prettier" },
+    html = { "prettier" },
     json = { "prettier_d_slim", "prettier" },
     yaml = { "prettier" },
     yml = { "prettier" },
@@ -24,6 +24,11 @@ require("conform").setup({
     },
     yamllint = {
       args = { "yamllint", "--format", "parsable", "--strict", "-" },
+    },
+    prettier_d_slim = {
+      command = "prettier_d_slim",
+      args = { "--stdin", "--stdin-filepath", "$FILENAME" },
+      require_cwd = true,
     },
     prettier = {
       require_cwd = true,
