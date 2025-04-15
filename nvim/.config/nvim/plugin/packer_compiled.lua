@@ -115,7 +115,7 @@ _G.packer_plugins = {
     url = "https://github.com/stevearc/conform.nvim"
   },
   ["dashboard-nvim"] = {
-    config = { "\27LJ\2\n�\t\0\0\6\0\17\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\0034\4\a\0005\5\a\0>\5\1\0045\5\b\0>\5\2\0045\5\t\0>\5\3\0045\5\n\0>\5\4\0045\5\v\0>\5\5\0045\5\f\0>\5\6\4=\4\r\0035\4\14\0=\4\15\3=\3\16\2B\0\2\1K\0\1\0\vconfig\vfooter\1\3\0\0\5.⚡ Neovim loaded. Ready to dominate. ⚡\vcenter\1\0\4\bkey\6q\vaction\aqa\tdesc\tQuit\ticon\v🚪  \1\0\4\bkey\6c\vaction!edit ~/.config/nvim/init.lua\tdesc\16Edit Config\ticon\r⚙️  \1\0\4\bkey\6p\vaction\23Telescope projects\tdesc\rProjects\ticon\14🗂️  \1\0\4\bkey\6r\vaction\23Telescope oldfiles\tdesc\17Recent Files\ticon\v🕒  \1\0\4\bkey\6w\vaction\24Telescope live_grep\tdesc\14Find Word\ticon\v🔍  \1\0\a\vkey_hl\vNumber\bkey\6f\fdesc_hl\vString\vaction\25Telescope find_files\ficon_hl\nTitle\tdesc\14Find File\ticon\v📂  \vheader\1\0\3\vcenter\0\vheader\0\vfooter\0\1\v\0\0\5W ███╗   ██╗██╗   ██╗██╗███╗   ███╗] ████╗  ██║██║   ██║██║████╗ ████║a ██╔██╗ ██║██║   ██║██║██╔████╔██║g ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║_ ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║S ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝\5*    [ Code. Think. Destroy. Repeat. ]\5\1\0\2\vconfig\0\ntheme\tdoom\nsetup\14dashboard\frequire\0" },
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15pdashboard\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -170,7 +170,7 @@ _G.packer_plugins = {
   },
   ["nvim-docs-view"] = {
     commands = { "DocsViewToggle" },
-    config = { "\27LJ\2\nV\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\rposition\vbottom\nwidth\3<\nsetup\14docs-view\frequire\0" },
+    config = { "\27LJ\2\nV\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\nwidth\3<\rposition\vbottom\nsetup\14docs-view\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -257,18 +257,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: supermaven-nvim
-time([[Config for supermaven-nvim]], true)
-try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20supermaven-nvim\frequire\0", "config", "supermaven-nvim")
-time([[Config for supermaven-nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
 -- Config for: nvim-highlight-colors
 time([[Config for nvim-highlight-colors]], true)
 try_loadstring("\27LJ\2\nG\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\26nvim-highlight-colors\frequire\0", "config", "nvim-highlight-colors")
 time([[Config for nvim-highlight-colors]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: supermaven-nvim
+time([[Config for supermaven-nvim]], true)
+try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20supermaven-nvim\frequire\0", "config", "supermaven-nvim")
+time([[Config for supermaven-nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
