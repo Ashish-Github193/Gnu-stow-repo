@@ -11,11 +11,15 @@ require("packer").startup(function(use)
   use("mbbill/undotree")
   use({
     "supermaven-inc/supermaven-nvim", -- Maven support
-    config = true,
+    config = function()
+      require("supermaven-nvim").setup({})
+    end,
   })
   use({
-    "windwp/nvim-autopairs", -- Autopairs
-    config = true,
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup({})
+    end,
   })
   use("L3MON4D3/LuaSnip") -- Snippets
   use("saadparwaiz1/cmp_luasnip") -- Snippets source for cmp
@@ -48,7 +52,9 @@ require("packer").startup(function(use)
   use("stevearc/conform.nvim") -- Code formatter
   use({
     "brenoprata10/nvim-highlight-colors",
-    config = true,
+    config = function()
+      require("nvim-highlight-colors").setup({})
+    end,
   })
   use({
     "folke/noice.nvim",
@@ -68,5 +74,74 @@ require("packer").startup(function(use)
   use({
     "nvim-lualine/lualine.nvim",
     requires = { "nvim-tree/nvim-web-devicons" },
+  })
+  use({
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    requires = { "nvim-tree/nvim-web-devicons" }, -- icons for dashboard
+    config = function()
+      require("dashboard").setup({
+        theme = "doom",
+        config = {
+          header = {
+            "",
+            " ███╗   ██╗██╗   ██╗██╗███╗   ███╗",
+            " ████╗  ██║██║   ██║██║████╗ ████║",
+            " ██╔██╗ ██║██║   ██║██║██╔████╔██║",
+            " ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+            " ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║",
+            " ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
+            "",
+            "    [ Code. Think. Destroy. Repeat. ]",
+            "",
+          },
+          center = {
+            {
+              icon = "📂",
+              icon_hl = "Title",
+              desc = "Find File",
+              desc_hl = "String",
+              key = "f",
+              key_hl = "Number",
+              action = "Telescope find_files",
+            },
+            {
+              icon = "🔍",
+              desc = "Find Word",
+              key = "w",
+              action = "Telescope live_grep",
+            },
+            {
+              icon = "🕘",
+              desc = "Recent Files",
+              key = "r",
+              action = "Telescope oldfiles",
+            },
+            {
+              icon = "📁",
+              desc = "Projects",
+              key = "p",
+              action = "Telescope projects",
+            },
+            {
+              icon = "🛠️",
+              desc = "Edit Config",
+              key = "c",
+              action = "edit ~/.config/nvim/init.lua",
+            },
+            {
+              icon = "🚪",
+              desc = "Quit",
+              key = "q",
+              action = "qa",
+            },
+          },
+          footer = {
+            "",
+            "⚡ Neovim loaded. Ready to dominate. ⚡",
+          },
+        },
+      })
+    end,
   })
 end)

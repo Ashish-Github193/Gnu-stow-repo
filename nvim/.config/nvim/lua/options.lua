@@ -6,7 +6,7 @@ vim.cmd("set number")
 vim.o.updatetime = 50
 vim.o.termguicolors = true
 vim.o.foldmethod = "indent"
-vim.o.foldlevelstart = 1
+vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.foldcolumn = "1"
 
