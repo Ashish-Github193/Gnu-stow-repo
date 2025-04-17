@@ -47,7 +47,7 @@ M.setup = function()
         },
         {
           icon = "🛠️",
-          desc = " Edit Config",
+          desc = "Edit Config",
           key = "c",
           action = "edit ~/.config/nvim/init.lua",
         },

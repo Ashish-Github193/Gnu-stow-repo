@@ -14,8 +14,8 @@
   "show_edit_predictions": true,
   "assistant": {
     "default_model": {
-      "provider": "openai",
-      "model": "gpt-3.5-turbo"
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
@@ -38,6 +38,7 @@
       "show_edit_predictions": true
     },
     "Python": {
+      "show_edit_predictions": false,
       "language_servers": ["basedpyright", "!pyright", "!pylsp"],
       "format_on_save": "on",
       "formatter": [

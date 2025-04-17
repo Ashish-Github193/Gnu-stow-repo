@@ -8,6 +8,6 @@ cmp.setup({
     { name = "path" },
   },
   mapping = cmp.mapping.preset.insert({
-    ["<TAB>"] = cmp.mapping.confirm({ select = true }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
   }),
 })
