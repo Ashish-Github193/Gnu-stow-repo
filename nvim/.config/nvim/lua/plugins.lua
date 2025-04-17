@@ -1,44 +1,72 @@
-require("packer").startup(function(use)
-  use("wbthomason/packer.nvim") -- Package manager
-  use("nvim-treesitter/nvim-treesitter") -- Syntax highlighting
-  use("tpope/vim-fugitive") -- Git commands in nvim
-  use("neovim/nvim-lspconfig") -- LSP
-  use("hrsh7th/nvim-cmp") -- Autocompletion
-  use("hrsh7th/cmp-nvim-lsp") -- LSP completion source
-  use("hrsh7th/cmp-buffer") -- Buffer completion source
-  use("hrsh7th/cmp-path") -- Path completion source
-  use("lukas-reineke/indent-blankline.nvim")
-  use("mbbill/undotree")
-  use({
-    "supermaven-inc/supermaven-nvim", -- Maven support
+local plugins = {
+  -- Syntax highlighting
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+
+  -- Git commands in nvim
+  { "tpope/vim-fugitive" },
+
+  -- LSP
+  { "neovim/nvim-lspconfig" },
+
+  -- Autocompletion
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" }, -- LSP completion source
+  { "hrsh7th/cmp-buffer" }, -- Buffer completion source
+  { "hrsh7th/cmp-path" }, -- Path completion source
+
+  -- Indentation guides
+  { "lukas-reineke/indent-blankline.nvim" },
+
+  -- Undo tree
+  { "mbbill/undotree" },
+
+  -- Supermaven support
+  {
+    "supermaven-inc/supermaven-nvim",
     config = function()
       require("supermaven-nvim").setup({})
     end,
-  })
-  use({
+  },
+
+  -- Autopairs
+  {
     "windwp/nvim-autopairs",
     config = function()
       require("nvim-autopairs").setup({})
     end,
-  })
-  use("L3MON4D3/LuaSnip") -- Snippets
-  use("saadparwaiz1/cmp_luasnip") -- Snippets source for cmp
-  use("BurntSushi/ripgrep") -- Searching
-  use({
+  },
+
+  -- Snippets
+  { "L3MON4D3/LuaSnip" },
+  { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for cmp
+
+  -- Searching
+  { "BurntSushi/ripgrep" },
+
+  -- Telescope
+  {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.8", -- Searching
-    requires = { "nvim-lua/plenary.nvim" },
-  })
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-  use({
-    "nvim-tree/nvim-tree.lua", -- File explorer
-    requires = { "nvim-tree/nvim-web-devicons" },
-  })
-  use({ "williamboman/mason.nvim" }) -- LSP installer
-  use({ "williamboman/mason-lspconfig.nvim" }) -- LSP installer
-  use({
-    "amrbashir/nvim-docs-view", -- Documentation viewer
-    opt = true,
+    tag = "0.1.8",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+  },
+
+  -- File explorer
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
+  -- LSP installer
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+
+  -- Documentation viewer
+  {
+    "amrbashir/nvim-docs-view",
     cmd = { "DocsViewToggle" },
     config = function()
       require("docs-view").setup({
@@ -46,41 +74,78 @@ require("packer").startup(function(use)
         width = 60,
       })
     end,
-  })
-  use({ "catppuccin/nvim", as = "catppuccin" }) -- Theme
-  use({ "folke/tokyonight.nvim", as = "tokyonight" }) -- Theme
-  use("stevearc/conform.nvim") -- Code formatter
-  use({
+  },
+
+  -- Themes
+  { "catppuccin/nvim", name = "catppuccin" },
+  { "folke/tokyonight.nvim", name = "tokyonight" },
+
+  -- Code formatter
+  { "stevearc/conform.nvim" },
+
+  -- Highlight colors
+  {
     "brenoprata10/nvim-highlight-colors",
     config = function()
       require("nvim-highlight-colors").setup({})
     end,
-  })
-  use({
+  },
+
+  -- Noice (UI enhancements)
+  {
     "folke/noice.nvim",
-    requires = {
-      "MunifTanjim/nui.nvim", -- UI components
-      "rcarriga/nvim-notify", -- Fancy notifications (optional)
-    },
-  })
-  use({ "lewis6991/gitsigns.nvim" })
-  use({
-    "olimorris/codecompanion.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
     },
-  })
-  use({
+  },
+
+  -- Git signs
+  { "lewis6991/gitsigns.nvim" },
+
+  -- Avante (AI assistant)
+  {
+    "yetone/avante.nvim",
+    branch = "main",
+    build = "make",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "MeanderingProgrammer/render-markdown.nvim",
+    },
+    config = function()
+      require("avante").setup({
+        provider = "openai",
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4.1-mini",
+          timeout = 30000,
+          temperature = 0,
+          max_completion_tokens = 16384,
+          reasoning_effort = "medium",
+        },
+      })
+    end,
+  },
+
+  -- Statusline
+  {
     "nvim-lualine/lualine.nvim",
-    requires = { "nvim-tree/nvim-web-devicons" },
-  })
-  use({
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
+  -- Dashboard
+  {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
-    requires = { "nvim-tree/nvim-web-devicons" }, -- icons for dashboard
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("pdashboard").setup()
+      require("dashboard").setup() -- Note: Corrected 'pdashboard' to 'dashboard'
     end,
-  })
-end)
+  },
+}
+
+-- Setup Lazy.nvim
+require("lazy").setup(plugins)

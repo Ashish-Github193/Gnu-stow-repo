@@ -79,6 +79,12 @@ _G.packer_plugins = {
     path = "/home/x/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["avante.nvim"] = {
+    config = { "\27LJ\2\nç\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\vopenai\1\0\6\nmodel\17gpt-4.1-mini\21reasoning_effort\vmedium\rendpoint\30https://api.openai.com/v1\ftimeout\3°ê\1\26max_completion_tokens\3€€\1\16temperature\3\0\1\0\2\rprovider\vopenai\vopenai\0\nsetup\vavante\frequire\0" },
+    loaded = true,
+    path = "/home/x/.local/share/nvim/site/pack/packer/start/avante.nvim",
+    url = "https://github.com/yetone/avante.nvim"
+  },
   catppuccin = {
     loaded = true,
     path = "/home/x/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -103,11 +109,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/x/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
-  },
-  ["codecompanion.nvim"] = {
-    loaded = true,
-    path = "/home/x/.local/share/nvim/site/pack/packer/start/codecompanion.nvim",
-    url = "https://github.com/olimorris/codecompanion.nvim"
   },
   ["conform.nvim"] = {
     loaded = true,
@@ -261,6 +262,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for nvim-highlight-colors]], true)
 try_loadstring("\27LJ\2\nG\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\26nvim-highlight-colors\frequire\0", "config", "nvim-highlight-colors")
 time([[Config for nvim-highlight-colors]], false)
+-- Config for: avante.nvim
+time([[Config for avante.nvim]], true)
+try_loadstring("\27LJ\2\nç\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\vopenai\1\0\6\nmodel\17gpt-4.1-mini\21reasoning_effort\vmedium\rendpoint\30https://api.openai.com/v1\ftimeout\3°ê\1\26max_completion_tokens\3€€\1\16temperature\3\0\1\0\2\rprovider\vopenai\vopenai\0\nsetup\vavante\frequire\0", "config", "avante.nvim")
+time([[Config for avante.nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")

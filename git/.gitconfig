@@ -6,3 +6,5 @@
 [user]
 	name = Ashish Kumar Jha
 	email = 79639825+Ashish-Github193@users.noreply.github.com
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
