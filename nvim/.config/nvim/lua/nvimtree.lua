@@ -3,8 +3,8 @@ require("nvim-tree").setup({
     sorter = "case_sensitive",
   },
   view = {
-    side = "right",
-    width = 35,
+    side = "left",
+    adaptive_size = true,
   },
   renderer = {
     group_empty = true,

@@ -47,21 +47,16 @@ vim.keymap.set("n", "<C-q>", "<Esc>:q<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Docs view keybindings
--- Toggle the Docs View
 vim.keymap.set("n", "<leader>dv", ":DocsViewToggle<CR>", { noremap = true, silent = true })
 
 -- NvimTree keybindings
--- Toggle the NvimTree
 vim.keymap.set("n", "<C-l>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 
 -- Telescope keybindings
--- Toggle the Find Files
 vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, {})
--- Toggle the Git Branch View
+vim.keymap.set("n", "<leader>f", ":Telescope live_grep<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>", { noremap = true, silent = true })
--- Browse between buffers using Telescope
 vim.keymap.set("n", "<leader>b", ":Telescope buffers<CR>", { noremap = true, silent = true })
--- Search for a word in the current file
 vim.keymap.set(
   "n",
   "<C-f>",

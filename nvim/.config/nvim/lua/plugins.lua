@@ -1,6 +1,6 @@
 local plugins = {
   -- Syntax highlighting
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter" },
 
   -- Git commands in nvim
   { "tpope/vim-fugitive" },
@@ -77,8 +77,9 @@ local plugins = {
   },
 
   -- Themes
-  { "catppuccin/nvim", name = "catppuccin" },
-  { "folke/tokyonight.nvim", name = "tokyonight" },
+  --  { "catppuccin/nvim", name = "catppuccin" },
+  --  { "folke/tokyonight.nvim", name = "tokyonight" },
+  { "rose-pine/neovim", name = "rose-pine" },
 
   -- Code formatter
   { "stevearc/conform.nvim" },
@@ -147,5 +148,4 @@ local plugins = {
   },
 }
 
--- Setup Lazy.nvim
 require("lazy").setup(plugins)
