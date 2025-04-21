@@ -10,7 +10,7 @@ require("conform").setup({
     scss = { "prettier_d_slim", "prettier" },
     markdown = { "prettier_d_slim", "prettier" },
     html = { "prettier" },
-    json = { "prettier_d_slim", "prettier" },
+    json = { "prettier_d_slim", stop_after_first = true },
     yaml = { "prettier" },
     yml = { "prettier" },
     graphql = { "prettier_d_slim", "prettier" },

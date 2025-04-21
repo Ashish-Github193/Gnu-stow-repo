@@ -17,6 +17,6 @@ require("noice").setup({
 })
 
 require("notify").setup({
-  timeout = 500,
+  timeout = 2000,
   stages = "slide",
 })

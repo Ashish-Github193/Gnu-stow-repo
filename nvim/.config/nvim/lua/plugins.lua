@@ -104,6 +104,16 @@ local plugins = {
   -- Git signs
   { "lewis6991/gitsigns.nvim" },
 
+  -- MCPHub
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+    },
+    cmd = "MCPHub", -- lazy load by default
+    build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+  },
+
   -- Avante (AI assistant)
   {
     "yetone/avante.nvim",
@@ -116,19 +126,6 @@ local plugins = {
       "MunifTanjim/nui.nvim",
       "MeanderingProgrammer/render-markdown.nvim",
     },
-    config = function()
-      require("avante").setup({
-        provider = "openai",
-        openai = {
-          endpoint = "https://api.openai.com/v1",
-          model = "gpt-4.1-mini",
-          timeout = 30000,
-          temperature = 0,
-          max_completion_tokens = 16384,
-          reasoning_effort = "medium",
-        },
-      })
-    end,
   },
 
   -- Statusline
