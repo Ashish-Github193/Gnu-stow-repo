@@ -134,13 +134,21 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
-  -- Dashboard
+  -- Alpha (dashboard replacement)
   {
-    "nvimdev/dashboard-nvim",
-    event = "VimEnter",
+    "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("dashboard").setup() -- Note: Corrected 'pdashboard' to 'dashboard'
+      require("alpha").setup(require("alpha.themes.dashboard").config)
+    end,
+  },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    ft = { "markdown" },
+    config = function()
+      vim.g.mkdp_auto_start = 1 -- auto open preview
     end,
   },
 }
