@@ -143,14 +143,14 @@ local plugins = {
     end,
   },
 
-  {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    ft = { "markdown" },
-    config = function()
-      vim.g.mkdp_auto_start = 1 -- auto open preview
-    end,
-  },
+  --  {
+  --    "iamcco/markdown-preview.nvim",
+  --    build = "cd app && npm install",
+  --    ft = { "markdown" },
+  --    config = function()
+  --      vim.g.mkdp_auto_start = 1 -- auto open preview
+  --    end,
+  --  },
 }
 
 require("lazy").setup(plugins)

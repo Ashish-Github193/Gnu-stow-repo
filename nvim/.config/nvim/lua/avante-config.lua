@@ -1,12 +1,18 @@
 require("avante").setup({
-  provider = "openai",
-  openai = {
-    endpoint = "https://api.openai.com/v1",
-    model = "gpt-4.1",
-    timeout = 30000,
+  provider = "claude",
+  --  openai = {
+  --    endpoint = "https://api.openai.com/v1",
+  --    model = "gpt-4.1",
+  --    timeout = 30000,
+  --    temperature = 0,
+  --    max_completion_tokens = 16384,
+  --    reasoning_effort = "medium",
+  --  },
+  claude = {
+    endpoint = "https://api.anthropic.com",
+    model = "claude-3-7-sonnet-20250219",
     temperature = 0,
-    max_completion_tokens = 16384,
-    reasoning_effort = "medium",
+    max_tokens = 8192,
   },
   system_prompt = function()
     local hub = require("mcphub").get_hub_instance()
