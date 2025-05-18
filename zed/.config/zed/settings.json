@@ -12,7 +12,7 @@
   },
   "vim_mode": false,
   "show_edit_predictions": true,
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-5-sonnet-latest"
@@ -27,7 +27,7 @@
   "theme": {
     "mode": "dark",
     "light": "Ayu Light",
-    "dark": "One Dark"
+    "dark": "Ayu Dark"
   },
   "terminal": {
     "dock": "bottom",
