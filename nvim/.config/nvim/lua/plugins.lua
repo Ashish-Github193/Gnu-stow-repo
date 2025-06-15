@@ -40,9 +40,6 @@ local plugins = {
   { "L3MON4D3/LuaSnip" },
   { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for cmp
 
-  -- Searching
-  { "BurntSushi/ripgrep" },
-
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -63,18 +60,6 @@ local plugins = {
   -- LSP installer
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
-
-  -- Documentation viewer
-  {
-    "amrbashir/nvim-docs-view",
-    cmd = { "DocsViewToggle" },
-    config = function()
-      require("docs-view").setup({
-        position = "bottom",
-        width = 60,
-      })
-    end,
-  },
 
   -- Themes
   --  { "catppuccin/nvim", name = "catppuccin" },
