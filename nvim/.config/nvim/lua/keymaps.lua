@@ -15,17 +15,16 @@ vim.keymap.set("v", ";", "l", { noremap = true })
 vim.keymap.set("n", "<C-d>", "yyp", { noremap = true, silent = true })
 -- Select all text
 vim.keymap.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
--- Keymap to create a new tab
-vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { noremap = true, silent = true })
--- Keymap to close the current tab
-vim.keymap.set("n", "<C-c>", ":tabclose<CR>", { noremap = true, silent = true })
--- Switch to the previous tab (Ctrl + PageUp)
-vim.keymap.set("n", "<C-PageUp>", ":tabnext -1<CR>:NvimTreeRefresh<CR>", { noremap = true, silent = true })
--- Switch to the next tab (Ctrl + PageDown)
-vim.keymap.set("n", "<C-PageDown>", ":tabnext +1<CR>:NvimTreeRefresh<CR>", { noremap = true, silent = true })
+-- These old tab keybindings are now handled by bufferline below
 -- Save the current file
-vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
-vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-s>", function()
+  vim.cmd("write")
+end, { noremap = true, silent = true, desc = "Save file" })
+vim.keymap.set("i", "<C-s>", function()
+  vim.cmd("write")
+end, { noremap = true, silent = true, desc = "Save file" })
+-- Alternative save keymap if Ctrl-S doesn't work
+vim.keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true, desc = "Save file (alternative)" })
 -- Undo the last change
 vim.keymap.set("n", "<C-z>", ":u<CR>", { noremap = true, silent = true })
 -- Move the current line up with Ctrl + Shift + Up Arrow
@@ -84,7 +83,13 @@ vim.keymap.set("n", "<leader>gc", ":DiffviewClose<CR>", { noremap = true, silent
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { noremap = true, silent = true })
 
 -- Buffer navigation with bufferline
-vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-PageDown>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-PageUp>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-c>", ":bdelete<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-t>", ":enew<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bd", ":BufferLinePickClose<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bp", ":BufferLinePick<CR>", { noremap = true, silent = true })
+
+-- Performance monitoring keybindings
+vim.keymap.set("n", "<leader>lazy", ":Lazy<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>health", ":checkhealth<CR>", { noremap = true, silent = true })

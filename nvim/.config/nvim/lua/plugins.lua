@@ -89,6 +89,25 @@ local plugins = {
         view_options = {
           show_hidden = true,
         },
+        use_default_keymaps = false,
+        keymaps = {
+          ["g?"] = "actions.show_help",
+          ["<CR>"] = "actions.select",
+          ["<C-v>"] = "actions.select_vsplit",
+          ["<C-h>"] = "actions.select_split",
+          ["<C-t>"] = "actions.select_tab",
+          ["<C-p>"] = "actions.preview",
+          ["<C-c>"] = "actions.close",
+          ["<C-r>"] = "actions.refresh",
+          ["-"] = "actions.parent",
+          ["_"] = "actions.open_cwd",
+          ["`"] = "actions.cd",
+          ["~"] = "actions.tcd",
+          ["gs"] = "actions.change_sort",
+          ["gx"] = "actions.open_external",
+          ["g."] = "actions.toggle_hidden",
+          ["g\\"] = "actions.toggle_trash",
+        },
       })
     end,
   },
@@ -198,7 +217,9 @@ local plugins = {
           numbers = "buffer_id",
           diagnostics = "nvim_lsp",
           separator_style = "slant",
+          themable = true,
         },
+        highlights = require("rose-pine.plugins.bufferline"),
       })
     end,
   },
@@ -245,6 +266,15 @@ local plugins = {
     version = "*",
     config = function()
       require("mini.animate").setup()
+    end,
+  },
+
+  -- Performance monitoring
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function()
+      vim.g.startuptime_tries = 10
     end,
   },
 

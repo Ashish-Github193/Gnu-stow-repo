@@ -10,6 +10,9 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.foldcolumn = "1"
 
+-- Fix Ctrl-S being captured by terminal
+vim.cmd("silent! !stty -ixon < /dev/tty > /dev/tty")
+
 vim.g.python3_host_prog = "/home/x/.local/share/mise/installs/python/3.11.12/bin/python3"
 
 vim.diagnostic.config({
