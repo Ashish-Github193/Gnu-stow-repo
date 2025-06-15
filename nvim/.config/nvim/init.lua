@@ -14,6 +14,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("options")
+
+-- Initialize file size constraints before loading plugins
+local constraints = require("file-size-constraints")
+constraints.setup_autocmd()
+
 require("plugins")
 require("keymaps")
 require("gitsigns-config")

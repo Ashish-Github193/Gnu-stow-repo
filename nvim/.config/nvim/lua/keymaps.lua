@@ -93,3 +93,6 @@ vim.keymap.set("n", "<leader>bp", ":BufferLinePick<CR>", { noremap = true, silen
 -- Performance monitoring keybindings
 vim.keymap.set("n", "<leader>lazy", ":Lazy<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>health", ":checkhealth<CR>", { noremap = true, silent = true })
+
+-- File size constraints
+-- <leader>fs is defined in file-size-constraints.lua
