@@ -68,3 +68,23 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>c", ":CodeCompanion<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>cc", ":CodeCompanionChat<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ca", ":CodeCompanionActions<CR>", { noremap = true, silent = true })
+
+-- Oil keybindings
+vim.keymap.set("n", "<leader>o", ":Oil<CR>", { noremap = true, silent = true })
+
+-- Flash keybindings
+vim.keymap.set({ "n", "x", "o" }, "s", require("flash").jump, { desc = "Flash" })
+vim.keymap.set({ "n", "x", "o" }, "S", require("flash").treesitter, { desc = "Flash Treesitter" })
+vim.keymap.set("o", "r", require("flash").remote, { desc = "Remote Flash" })
+vim.keymap.set({ "o", "x" }, "R", require("flash").treesitter_search, { desc = "Treesitter Search" })
+
+-- Git keybindings
+vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gc", ":DiffviewClose<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { noremap = true, silent = true })
+
+-- Buffer navigation with bufferline
+vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>bd", ":BufferLinePickClose<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>bp", ":BufferLinePick<CR>", { noremap = true, silent = true })

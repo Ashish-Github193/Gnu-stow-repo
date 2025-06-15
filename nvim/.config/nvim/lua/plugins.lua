@@ -40,6 +40,29 @@ local plugins = {
   { "L3MON4D3/LuaSnip" },
   { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for cmp
 
+  -- Advanced text objects and editing
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+  },
+
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("flash").setup()
+    end,
+  },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -55,6 +78,30 @@ local plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
+  -- Enhanced file management
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("oil").setup({
+        view_options = {
+          show_hidden = true,
+        },
+      })
+    end,
+  },
+
+  -- Quick file navigation
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local harpoon = require("harpoon")
+      harpoon:setup()
+    end,
   },
 
   -- LSP installer
@@ -89,6 +136,27 @@ local plugins = {
   -- Git signs
   { "lewis6991/gitsigns.nvim" },
 
+  -- Enhanced git integration
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("diffview").setup()
+    end,
+  },
+
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("neogit").setup()
+    end,
+  },
+
   -- MCPHub
   {
     "ravitemer/mcphub.nvim",
@@ -119,12 +187,64 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
+  -- Buffer management
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("bufferline").setup({
+        options = {
+          numbers = "buffer_id",
+          diagnostics = "nvim_lsp",
+          separator_style = "slant",
+        },
+      })
+    end,
+  },
+
+  -- Session management
+  {
+    "rmagatti/auto-session",
+    config = function()
+      require("auto-session").setup({
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      })
+    end,
+  },
+
   -- Alpha (dashboard replacement)
   {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("alpha").setup(require("alpha.themes.dashboard").config)
+    end,
+  },
+
+  -- UI & Workflow enhancements
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("trouble").setup()
+    end,
+  },
+
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("which-key").setup()
+    end,
+  },
+
+  {
+    "echasnovski/mini.animate",
+    version = "*",
+    config = function()
+      require("mini.animate").setup()
     end,
   },
 
