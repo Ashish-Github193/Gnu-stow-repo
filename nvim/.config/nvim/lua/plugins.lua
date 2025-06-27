@@ -25,7 +25,7 @@ local plugins = {
   },
 
   -- Autocompletion
-  { 
+  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -68,7 +68,7 @@ local plugins = {
   },
 
   -- Snippets
-  { 
+  {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
   },
@@ -80,6 +80,32 @@ local plugins = {
     event = "VeryLazy",
     config = function()
       require("nvim-surround").setup()
+    end,
+  },
+
+  -- Smart commenting
+  {
+    "numToStr/Comment.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("Comment").setup({
+        padding = true,
+        sticky = true,
+        ignore = "^$",
+        toggler = {
+          line = "gcc",
+          block = "gbc",
+        },
+        opleader = {
+          line = "gc",
+          block = "gb",
+        },
+        extra = {
+          above = "gcO",
+          below = "gco",
+          eol = "gcA",
+        },
+      })
     end,
   },
 
@@ -120,7 +146,6 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
-
   -- LSP installer
   {
     "williamboman/mason.nvim",
@@ -141,11 +166,17 @@ local plugins = {
   { "rose-pine/neovim", name = "rose-pine" },
 
   -- Code formatter
-  { 
+  {
     "stevearc/conform.nvim",
     cmd = { "ConformInfo", "Format" },
     keys = {
-      { "<leader>mp", function() require("conform").format() end, desc = "Format" },
+      {
+        "<leader>mp",
+        function()
+          require("conform").format()
+        end,
+        desc = "Format",
+      },
     },
   },
 
@@ -164,7 +195,9 @@ local plugins = {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    cond = function() return should_load("noice.nvim") end,
+    cond = function()
+      return should_load("noice.nvim")
+    end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
@@ -240,7 +273,7 @@ local plugins = {
           separator_style = "slant",
           enforce_regular_tabs = false,
           always_show_bufferline = false,
-          sort_by = 'insert_after_current',
+          sort_by = "insert_after_current",
         },
         highlights = require("rose-pine.plugins.bufferline"),
       })
@@ -273,6 +306,41 @@ local plugins = {
     end,
   },
 
+  -- Terminal integration
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    cmd = { "ToggleTerm", "TermExec" },
+    keys = {
+      { "<C-\\>", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+      { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float terminal" },
+      { "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal terminal" },
+      { "<leader>tv", "<cmd>ToggleTerm direction=vertical size=80<cr>", desc = "Vertical terminal" },
+    },
+    config = function()
+      require("toggleterm").setup({
+        size = 20,
+        open_mapping = [[<C-\>]],
+        hide_numbers = true,
+        shade_terminals = true,
+        shading_factor = 2,
+        start_in_insert = true,
+        insert_mappings = true,
+        persist_size = true,
+        direction = "float",
+        close_on_exit = true,
+        shell = vim.o.shell,
+        float_opts = {
+          border = "curved",
+          winblend = 0,
+          highlights = {
+            border = "Normal",
+            background = "Normal",
+          },
+        },
+      })
+    end,
+  },
 
   -- Performance monitoring
   {

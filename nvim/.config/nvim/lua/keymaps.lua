@@ -92,5 +92,9 @@ vim.keymap.set("n", "<leader>bp", ":BufferLinePick<CR>", { noremap = true, silen
 vim.keymap.set("n", "<leader>lazy", ":Lazy<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>health", ":checkhealth<CR>", { noremap = true, silent = true })
 
+-- Commenting keybindings (VS Code style)
+vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
+
 -- File size constraints
 -- <leader>fs is defined in file-size-constraints.lua
