@@ -52,9 +52,7 @@ M.should_enable_plugin = function(plugin_name, size_category)
     "nvim-lspconfig", 
     "mason.nvim",
     "mason-lspconfig.nvim",
-    "avante.nvim",
     "supermaven-nvim",
-    "mcphub.nvim",
   }
   
   local most_plugins = {
@@ -63,10 +61,10 @@ M.should_enable_plugin = function(plugin_name, size_category)
     "neogit",
     "indent-blankline.nvim",
     "nvim-highlight-colors",
-    "mini.animate",
     "bufferline.nvim",
     "lualine.nvim",
-    "alpha-nvim",
+    "noice.nvim",
+    "trouble.nvim",
   }
   
   local constraint = constraints[size_category] or {}
@@ -90,9 +88,7 @@ M.should_enable_plugin = function(plugin_name, size_category)
       "nvim-tree.lua",
       "telescope.nvim",
       "telescope-fzf-native.nvim",
-      "oil.nvim",
       "undotree",
-      "vim-fugitive",
     }
     return vim.tbl_contains(allowed, plugin_name)
   elseif vim.tbl_contains(constraint, "disable_heavy") then

@@ -9,30 +9,39 @@ end
 
 local plugins = {
   -- Syntax highlighting
-  { 
+  {
     "nvim-treesitter/nvim-treesitter",
-    cond = function() return should_load("nvim-treesitter") end,
+    cond = function()
+      return should_load("nvim-treesitter")
+    end,
   },
 
-  -- Git commands in nvim
-  { "tpope/vim-fugitive" },
-
   -- LSP
-  { 
+  {
     "neovim/nvim-lspconfig",
-    cond = function() return should_load("nvim-lspconfig") end,
+    cond = function()
+      return should_load("nvim-lspconfig")
+    end,
   },
 
   -- Autocompletion
-  { "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-nvim-lsp" }, -- LSP completion source
-  { "hrsh7th/cmp-buffer" }, -- Buffer completion source
-  { "hrsh7th/cmp-path" }, -- Path completion source
+  { 
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp", -- LSP completion source
+      "hrsh7th/cmp-buffer", -- Buffer completion source
+      "hrsh7th/cmp-path", -- Path completion source
+      "saadparwaiz1/cmp_luasnip", -- Snippets source for cmp
+    },
+  },
 
   -- Indentation guides
-  { 
+  {
     "lukas-reineke/indent-blankline.nvim",
-    cond = function() return should_load("indent-blankline.nvim") end,
+    cond = function()
+      return should_load("indent-blankline.nvim")
+    end,
   },
 
   -- Undo tree
@@ -41,7 +50,9 @@ local plugins = {
   -- Supermaven support
   {
     "supermaven-inc/supermaven-nvim",
-    cond = function() return should_load("supermaven-nvim") end,
+    cond = function()
+      return should_load("supermaven-nvim")
+    end,
     config = function()
       require("supermaven-nvim").setup({})
     end,
@@ -50,14 +61,17 @@ local plugins = {
   -- Autopairs
   {
     "windwp/nvim-autopairs",
+    event = "InsertEnter",
     config = function()
       require("nvim-autopairs").setup({})
     end,
   },
 
   -- Snippets
-  { "L3MON4D3/LuaSnip" },
-  { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for cmp
+  { 
+    "L3MON4D3/LuaSnip",
+    event = "InsertEnter",
+  },
 
   -- Advanced text objects and editing
   {
@@ -106,47 +120,19 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
-  -- Enhanced file management
-  {
-    "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("oil").setup({
-        view_options = {
-          show_hidden = true,
-        },
-        use_default_keymaps = false,
-        keymaps = {
-          ["g?"] = "actions.show_help",
-          ["<CR>"] = "actions.select",
-          ["<C-v>"] = "actions.select_vsplit",
-          ["<C-h>"] = "actions.select_split",
-          ["<C-t>"] = "actions.select_tab",
-          ["<C-p>"] = "actions.preview",
-          ["<C-c>"] = "actions.close",
-          ["<C-r>"] = "actions.refresh",
-          ["-"] = "actions.parent",
-          ["_"] = "actions.open_cwd",
-          ["`"] = "actions.cd",
-          ["~"] = "actions.tcd",
-          ["gs"] = "actions.change_sort",
-          ["gx"] = "actions.open_external",
-          ["g."] = "actions.toggle_hidden",
-          ["g\\"] = "actions.toggle_trash",
-        },
-      })
-    end,
-  },
-
 
   -- LSP installer
-  { 
+  {
     "williamboman/mason.nvim",
-    cond = function() return should_load("mason.nvim") end,
+    cond = function()
+      return should_load("mason.nvim")
+    end,
   },
-  { 
+  {
     "williamboman/mason-lspconfig.nvim",
-    cond = function() return should_load("mason-lspconfig.nvim") end,
+    cond = function()
+      return should_load("mason-lspconfig.nvim")
+    end,
   },
 
   -- Themes
@@ -155,12 +141,20 @@ local plugins = {
   { "rose-pine/neovim", name = "rose-pine" },
 
   -- Code formatter
-  { "stevearc/conform.nvim" },
+  { 
+    "stevearc/conform.nvim",
+    cmd = { "ConformInfo", "Format" },
+    keys = {
+      { "<leader>mp", function() require("conform").format() end, desc = "Format" },
+    },
+  },
 
   -- Highlight colors
   {
     "brenoprata10/nvim-highlight-colors",
-    cond = function() return should_load("nvim-highlight-colors") end,
+    cond = function()
+      return should_load("nvim-highlight-colors")
+    end,
     config = function()
       require("nvim-highlight-colors").setup({})
     end,
@@ -169,6 +163,8 @@ local plugins = {
   -- Noice (UI enhancements)
   {
     "folke/noice.nvim",
+    event = "VeryLazy",
+    cond = function() return should_load("noice.nvim") end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
@@ -176,15 +172,19 @@ local plugins = {
   },
 
   -- Git signs
-  { 
+  {
     "lewis6991/gitsigns.nvim",
-    cond = function() return should_load("gitsigns.nvim") end,
+    cond = function()
+      return should_load("gitsigns.nvim")
+    end,
   },
 
   -- Enhanced git integration
   {
     "sindrets/diffview.nvim",
-    cond = function() return should_load("diffview.nvim") end,
+    cond = function()
+      return should_load("diffview.nvim")
+    end,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("diffview").setup()
@@ -193,7 +193,9 @@ local plugins = {
 
   {
     "NeogitOrg/neogit",
-    cond = function() return should_load("neogit") end,
+    cond = function()
+      return should_load("neogit")
+    end,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
@@ -204,43 +206,21 @@ local plugins = {
     end,
   },
 
-  -- MCPHub
-  {
-    "ravitemer/mcphub.nvim",
-    cond = function() return should_load("mcphub.nvim") end,
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
-    },
-    cmd = "MCPHub", -- lazy load by default
-    build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
-  },
-
-  -- Avante (AI assistant)
-  {
-    "yetone/avante.nvim",
-    cond = function() return should_load("avante.nvim") end,
-    branch = "main",
-    build = "make",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "MeanderingProgrammer/render-markdown.nvim",
-    },
-  },
-
   -- Statusline
   {
     "nvim-lualine/lualine.nvim",
-    cond = function() return should_load("lualine.nvim") end,
+    cond = function()
+      return should_load("lualine.nvim")
+    end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   -- Buffer management
   {
     "akinsho/bufferline.nvim",
-    cond = function() return should_load("bufferline.nvim") end,
+    cond = function()
+      return should_load("bufferline.nvim")
+    end,
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
@@ -267,41 +247,21 @@ local plugins = {
     end,
   },
 
-  -- Alpha (dashboard replacement)
-  {
-    "goolord/alpha-nvim",
-    cond = function() return should_load("alpha-nvim") end,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("alpha").setup(require("alpha.themes.dashboard").config)
-    end,
-  },
-
   -- UI & Workflow enhancements
   {
     "folke/trouble.nvim",
+    cmd = { "Trouble", "TroubleToggle" },
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>" },
+      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>" },
+    },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("trouble").setup()
     end,
   },
 
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("which-key").setup()
-    end,
-  },
-
-  {
-    "echasnovski/mini.animate",
-    cond = function() return should_load("mini.animate") end,
-    version = "*",
-    config = function()
-      require("mini.animate").setup()
-    end,
-  },
 
   -- Performance monitoring
   {

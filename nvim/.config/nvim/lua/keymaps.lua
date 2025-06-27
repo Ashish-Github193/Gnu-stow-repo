@@ -68,8 +68,6 @@ vim.keymap.set("n", "<leader>c", ":CodeCompanion<CR>", { noremap = true, silent 
 vim.keymap.set("n", "<leader>cc", ":CodeCompanionChat<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ca", ":CodeCompanionActions<CR>", { noremap = true, silent = true })
 
--- Oil keybindings
-vim.keymap.set("n", "<leader>o", ":Oil<CR>", { noremap = true, silent = true })
 
 -- Flash keybindings
 vim.keymap.set({ "n", "x", "o" }, "s", require("flash").jump, { desc = "Flash" })
