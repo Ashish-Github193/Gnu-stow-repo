@@ -2,6 +2,7 @@
 go = "1.21"
 node = "22"
 python = "3.11"
+ripgrep = "latest"
 rust = "latest"
 
 [settings]
