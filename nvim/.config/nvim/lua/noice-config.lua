@@ -17,6 +17,13 @@ require("noice").setup({
 })
 
 require("notify").setup({
-  timeout = 2000,
+  timeout = 3000,
   stages = "slide",
+  max_width = function()
+    return math.floor(vim.o.columns * 0.60)
+  end,
+  on_open = function(win)
+    -- Ensure the window is non-focusable
+    vim.api.nvim_win_set_config(win, { focusable = false })
+  end,
 })

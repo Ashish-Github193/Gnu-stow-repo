@@ -86,6 +86,7 @@ vim.keymap.set("n", "<C-c>", ":bdelete<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-t>", ":enew<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bd", ":BufferLinePickClose<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bp", ":BufferLinePick<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ba", ":bufdo bdelete<CR>", { noremap = true, silent = true })
 
 -- Performance monitoring keybindings
 vim.keymap.set("n", "<leader>lazy", ":Lazy<CR>", { noremap = true, silent = true })
