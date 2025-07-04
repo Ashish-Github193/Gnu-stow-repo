@@ -68,7 +68,6 @@ vim.keymap.set("n", "<leader>c", ":CodeCompanion<CR>", { noremap = true, silent 
 vim.keymap.set("n", "<leader>cc", ":CodeCompanionChat<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ca", ":CodeCompanionActions<CR>", { noremap = true, silent = true })
 
-
 -- Flash keybindings
 vim.keymap.set({ "n", "x", "o" }, "s", require("flash").jump, { desc = "Flash" })
 vim.keymap.set({ "n", "x", "o" }, "S", require("flash").treesitter, { desc = "Flash Treesitter" })
@@ -98,3 +97,11 @@ vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
 
 -- File size constraints
 -- <leader>fs is defined in file-size-constraints.lua
+--
+local osc52 = require("osc52")
+vim.keymap.set("n", "<leader>y", osc52.copy_operator, { expr = true, desc = "OSC52: Yank motion" })
+vim.keymap.set("n", "<leader>Y", function()
+  osc52.copy_operator()
+  return "V"
+end, { expr = true, desc = "OSC52: Yank current line" })
+vim.keymap.set("v", "<leader>y", osc52.copy_visual, { desc = "OSC52: Yank visual selection" })

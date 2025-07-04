@@ -351,6 +351,14 @@ local plugins = {
     end,
   },
 
+  -- OSC 52 clipboard support for SSH
+  {
+    "ojroques/nvim-osc52",
+    config = function()
+      require("osc52").setup()
+    end,
+  },
+
   --  {
   --    "iamcco/markdown-preview.nvim",
   --    build = "cd app && npm install",
