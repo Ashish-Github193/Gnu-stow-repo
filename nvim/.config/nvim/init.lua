@@ -21,6 +21,7 @@ constraints.setup_autocmd()
 
 require("plugins")
 require("keymaps")
+require("auto-session-config")
 require("gitsigns-config")
 require("noice-config")
 require("indent-config")

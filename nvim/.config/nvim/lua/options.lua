@@ -6,9 +6,11 @@ vim.cmd("set number")
 vim.o.updatetime = 50
 vim.o.termguicolors = true
 vim.o.foldmethod = "indent"
+vim.o.foldcolumn = "1"
+vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.foldcolumn = "1"
+vim.o.fillchars = [[eob: ,fold: ,foldopen:O,foldsep: ,foldclose:C]]
 
 -- Fix Ctrl-S being captured by terminal
 vim.cmd("silent! !stty -ixon < /dev/tty > /dev/tty")

@@ -359,6 +359,23 @@ local plugins = {
     end,
   },
 
+  -- UFO folding
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      "kevinhwang91/promise-async",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    event = "BufRead",
+    config = function()
+      require("ufo").setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return { "treesitter", "indent" }
+        end,
+      })
+    end,
+  },
+
   --  {
   --    "iamcco/markdown-preview.nvim",
   --    build = "cd app && npm install",

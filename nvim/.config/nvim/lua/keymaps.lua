@@ -106,3 +106,12 @@ vim.keymap.set("n", "<leader>Y", function()
   return "V"
 end, { expr = true, desc = "OSC52: Yank current line" })
 vim.keymap.set("v", "<leader>y", osc52.copy_visual, { desc = "OSC52: Yank visual selection" })
+
+-- UFO folding keymaps
+vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
+vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds, { desc = "Open folds except kinds" })
+vim.keymap.set("n", "zm", require("ufo").closeFoldsWith, { desc = "Close folds with" })
+vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor, { desc = "Peek folded lines" })
+vim.keymap.set("n", "<leader>zf", require("ufo").openFoldsExceptKinds, { desc = "Open folds except kinds" })
+vim.keymap.set("n", "<leader>zc", require("ufo").closeFoldsWith, { desc = "Close folds with" })
