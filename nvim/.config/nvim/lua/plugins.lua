@@ -359,6 +359,29 @@ local plugins = {
     end,
   },
 
+  -- Minimap
+  {
+    "gorbit99/codewindow.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>mo", "<cmd>lua require('codewindow').open_minimap()<cr>", desc = "Open minimap" },
+      { "<leader>mc", "<cmd>lua require('codewindow').close_minimap()<cr>", desc = "Close minimap" },
+      { "<leader>mt", "<cmd>lua require('codewindow').toggle_minimap()<cr>", desc = "Toggle minimap" },
+    },
+    config = function()
+      local codewindow = require("codewindow")
+      codewindow.setup({
+        auto_enable = false,
+        minimap_width = 13,
+        relative = "win",
+        width_multiplier = 4,
+        screen_bounds = "background",
+        window_border = "none",
+        events = { "TextChanged", "InsertLeave", "DiagnosticChanged" },
+      })
+    end,
+  },
+
   -- UFO folding
   {
     "kevinhwang91/nvim-ufo",

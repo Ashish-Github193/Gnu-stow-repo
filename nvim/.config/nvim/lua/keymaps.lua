@@ -36,7 +36,10 @@ vim.keymap.set("v", "<C-s-Down>", ":m'>+1<CR>gv=gv", { noremap = true, silent = 
 -- Show the error in floating window
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { noremap = true, silent = true })
 -- Exit the current buffers
-vim.keymap.set("n", "<C-q>", "<Esc>:q<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-q>", function()
+  require("codewindow").close_minimap()
+  vim.cmd("q")
+end, { noremap = true, silent = true })
 
 -- Keybinding to toggle Git Blame
 -- vim.keymap.set("n", "<leader>tb", ":GitBlameToggle<CR>", { noremap = true, silent = true })
@@ -115,3 +118,10 @@ vim.keymap.set("n", "zm", require("ufo").closeFoldsWith, { desc = "Close folds w
 vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor, { desc = "Peek folded lines" })
 vim.keymap.set("n", "<leader>zf", require("ufo").openFoldsExceptKinds, { desc = "Open folds except kinds" })
 vim.keymap.set("n", "<leader>zc", require("ufo").closeFoldsWith, { desc = "Close folds with" })
+
+-- Auto-close minimap on quit events
+vim.api.nvim_create_autocmd("QuitPre", {
+  callback = function()
+    require("codewindow").close_minimap()
+  end,
+})
