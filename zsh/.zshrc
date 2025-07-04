@@ -183,6 +183,13 @@ else
     fi
 fi
 
+# SSH agent socket
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# Export paths
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
 # sources
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -191,11 +198,3 @@ eval "$(uv generate-shell-completion zsh)"
 if [ -f ~/.env ]; then
 	set -a && source ~/.env && set +a
 fi
-
-# SSH agent socket
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
-# Export paths
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-
