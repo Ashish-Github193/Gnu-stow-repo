@@ -199,3 +199,10 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 eval "$(uv generate-shell-completion zsh)"
 
+
+# bun completions
+[ -s "/home/x/.bun/_bun" ] && source "/home/x/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
