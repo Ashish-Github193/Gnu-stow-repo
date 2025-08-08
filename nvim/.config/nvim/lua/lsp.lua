@@ -1,19 +1,5 @@
 require("mason").setup()
 
-local servers = {
-  "pyright",
-  "dockerls",
-  "lua_ls",
-  "tailwindcss",
-  "ts_ls",
-  "yamlls",
-  "terraformls",
-}
-
-require("mason-lspconfig").setup({
-  ensure_installed = servers,
-})
-
 local lspconfig = require("lspconfig")
 
 -- Define a global on_attach function to apply keymaps to all LSPs
@@ -25,7 +11,8 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 end
 
--- Setup LSP servers with the global on_attach function
+-- Setup LSP servers manually (no mason-lspconfig to avoid auto-setup conflicts)
+local servers = { "pyright", "dockerls", "lua_ls", "tailwindcss", "ts_ls", "yamlls", "terraformls" }
 for _, server in ipairs(servers) do
   lspconfig[server].setup({
     on_attach = on_attach,
