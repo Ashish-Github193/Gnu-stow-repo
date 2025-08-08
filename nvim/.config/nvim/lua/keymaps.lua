@@ -51,8 +51,12 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- Docs view keybindings
 vim.keymap.set("n", "<leader>dv", ":DocsViewToggle<CR>", { noremap = true, silent = true })
 
--- NvimTree keybindings
-vim.keymap.set("n", "<C-l>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+-- Neo-tree keybindings
+vim.keymap.set("n", "<C-o>", ":Neotree float<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>nt", ":Neotree<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>nf", ":Neotree focus<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>nb", ":Neotree buffers<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ng", ":Neotree git_status<CR>", { noremap = true, silent = true })
 
 -- Telescope keybindings
 vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, {})

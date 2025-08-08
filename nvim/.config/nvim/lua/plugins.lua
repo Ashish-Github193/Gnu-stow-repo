@@ -142,8 +142,14 @@ local plugins = {
 
   -- File explorer
   {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    },
+    lazy = false,
   },
 
   -- LSP installer
@@ -163,7 +169,7 @@ local plugins = {
   -- Themes
   --  { "catppuccin/nvim", name = "catppuccin" },
   --  { "folke/tokyonight.nvim", name = "tokyonight" },
-  { "rose-pine/neovim", name = "rose-pine" },
+  { "rebelot/kanagawa.nvim" },
 
   -- Code formatter
   {
@@ -275,7 +281,7 @@ local plugins = {
           always_show_bufferline = false,
           sort_by = "insert_after_current",
         },
-        highlights = require("rose-pine.plugins.bufferline"),
+        -- highlights = require("rose-pine.plugins.bufferline"),
       })
     end,
   },

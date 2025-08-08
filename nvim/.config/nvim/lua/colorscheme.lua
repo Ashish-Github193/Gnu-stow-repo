@@ -1,6 +1,6 @@
 -- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme("tokyonight-moon")
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme kanagawa-dragon")
 
 --return {
 --  "rose-pine/neovim",
