@@ -72,6 +72,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git
   zsh-autosuggestions  
   zsh-syntax-highlighting
+  docker-status
   )
 
 source $ZSH/oh-my-zsh.sh
