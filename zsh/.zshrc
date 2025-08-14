@@ -133,6 +133,9 @@ alias tmux='tmux -u'
 alias ls='exa --long'
 alias lg='lazygit'
 alias ld='lazydocker'
+alias gbs='git branch | sed "s/^..//" | fzf | xargs git checkout'
+alias gwa='branch=$(git branch" | fzf) && (read "newPath?New worktree path: ") && git worktree add "$newPath" "$branch"'
+alias gwr="git worktree list | awk '{print \$1}' | fzf | xargs git worktree remove"
 
 export PATH=$HOME/.local/bin:$PATH
 
