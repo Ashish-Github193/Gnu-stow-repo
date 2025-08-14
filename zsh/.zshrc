@@ -128,14 +128,20 @@ alias gcl='git clone --depth 1'
 alias gi='git init'
 alias ga='git add'
 alias gc='git commit -m'
-alias gp='git push origin master'
+alias gsc='claude "commit all the staged changes and if version file present bump the version as per semver 2.0" && git push'
+alias gp='git push'
+alias gbs='git branch | sed "s/^..//" | fzf | xargs git checkout'
+alias gwa='branch=$(git branch --format="%(refname:short)" | fzf) \
+	&& read "newPath?New worktree path: " \
+	&& git worktree add "$newPath" "$branch"'
+alias gwr="git worktree list | awk '{print \$1}' | fzf | xargs git worktree remove"
+alias gwl='git worktree list | fzf --preview "git -C {1} status"'
+
+# utils
 alias tmux='tmux -u'
 alias ls='exa --long'
 alias lg='lazygit'
 alias ld='lazydocker'
-alias gbs='git branch | sed "s/^..//" | fzf | xargs git checkout'
-alias gwa='branch=$(git branch" | fzf) && (read "newPath?New worktree path: ") && git worktree add "$newPath" "$branch"'
-alias gwr="git worktree list | awk '{print \$1}' | fzf | xargs git worktree remove"
 
 export PATH=$HOME/.local/bin:$PATH
 
