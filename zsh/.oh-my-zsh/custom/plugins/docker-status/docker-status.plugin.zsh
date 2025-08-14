@@ -247,25 +247,7 @@ docker_status_show() {
 }
 
 # Function to run Docker status check
-_docker_status_background() {
-    sleep 0.1
-    docker_status_show
-}
-
-# Hook to run on shell initialization
 if [[ "$DOCKER_STATUS_ENABLED" == "true" ]]; then
-    # Try using zsh's precmd hook instead of immediate execution
-    autoload -Uz add-zsh-hook
-    
-    _docker_status_first_run() {
-        # Remove this hook after first run
-        add-zsh-hook -d precmd _docker_status_first_run
-        
-        # Run Docker status in background with complete detachment
-        {
-            _docker_status_background
-        } &|
-    }
-    
-    add-zsh-hook precmd _docker_status_first_run
+    docker_status_show
 fi
+
