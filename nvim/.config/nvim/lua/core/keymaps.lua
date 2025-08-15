@@ -58,23 +58,9 @@ vim.keymap.set("n", "<leader>nf", ":Neotree focus<CR>", { noremap = true, silent
 vim.keymap.set("n", "<leader>nb", ":Neotree buffers<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ng", ":Neotree git_status<CR>", { noremap = true, silent = true })
 
--- Telescope keybindings
-vim.keymap.set("n", "<C-p>", require("telescope.builtin").find_files, {})
-vim.keymap.set("n", "<leader>f", ":Telescope live_grep<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>b", ":Telescope buffers<CR>", { noremap = true, silent = true })
-vim.keymap.set(
-  "n",
-  "<C-f>",
-  ':lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
-  { noremap = true, silent = true }
-)
+-- Telescope keybindings (moved to telescope plugin file for proper lazy loading)
 
--- Flash keybindings
-vim.keymap.set({ "n", "x", "o" }, "s", require("flash").jump, { desc = "Flash" })
-vim.keymap.set({ "n", "x", "o" }, "S", require("flash").treesitter, { desc = "Flash Treesitter" })
-vim.keymap.set("o", "r", require("flash").remote, { desc = "Remote Flash" })
-vim.keymap.set({ "o", "x" }, "R", require("flash").treesitter_search, { desc = "Treesitter Search" })
+-- Flash keybindings (moved to flash plugin file for proper lazy loading)
 
 -- Git keybindings
 vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>", { noremap = true, silent = true })
@@ -100,22 +86,10 @@ vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
 
 -- File size constraints
 -- <leader>fs is defined in file-size-constraints.lua
-local osc52 = require("osc52")
-vim.keymap.set("n", "<leader>y", osc52.copy_operator, { expr = true, desc = "OSC52: Yank motion" })
-vim.keymap.set("n", "<leader>Y", function()
-  osc52.copy_operator()
-  return "V"
-end, { expr = true, desc = "OSC52: Yank current line" })
-vim.keymap.set("v", "<leader>y", osc52.copy_visual, { desc = "OSC52: Yank visual selection" })
 
--- UFO folding keymaps
-vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
-vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds, { desc = "Open folds except kinds" })
-vim.keymap.set("n", "zm", require("ufo").closeFoldsWith, { desc = "Close folds with" })
-vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor, { desc = "Peek folded lines" })
-vim.keymap.set("n", "<leader>zf", require("ufo").openFoldsExceptKinds, { desc = "Open folds except kinds" })
-vim.keymap.set("n", "<leader>zc", require("ufo").closeFoldsWith, { desc = "Close folds with" })
+-- OSC52 keymaps (moved to utilities plugin for proper lazy loading)
+
+-- UFO folding keymaps (moved to utilities plugin for proper lazy loading)
 
 -- Auto-close minimap on quit events
 vim.api.nvim_create_autocmd("QuitPre", {

@@ -13,27 +13,15 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("options")
+require("core.options")
 
 -- Initialize file size constraints before loading plugins
-local constraints = require("file-size-constraints")
+local constraints = require("core.file-size-constraints")
 constraints.setup_autocmd()
 
+-- Load all plugins (plugins.lua now handles collecting all plugin specs)
 require("plugins")
-require("keymaps")
-require("auto-session-config")
-require("gitsigns-config")
-require("noice-config")
-require("indent-config")
-require("conform-config")
-require("cmp-setup")
-require("lsp")
-require("treesitter")
-require("telescope-config")
-require("neotree")
-require("colorscheme")
-require("highlights")
-require("lualine-config")
-require("trouble-config")
-require("treesitter-textobjects-config")
-require("performance-monitor")
+
+-- Load remaining configuration
+require("core.keymaps")
+require("utils.performance-monitor")

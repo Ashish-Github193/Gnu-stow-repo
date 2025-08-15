@@ -1,6 +1,6 @@
 -- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme("tokyonight-moon")
-vim.cmd("colorscheme kanagawa-dragon")
+-- Colorscheme is now set in plugins/theme.lua
 
 --return {
 --  "rose-pine/neovim",
