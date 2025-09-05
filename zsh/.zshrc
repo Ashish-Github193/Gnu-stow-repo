@@ -217,3 +217,16 @@ eval "$(uv generate-shell-completion zsh)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+cd() {
+  builtin cd "$@" || return
+
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    deactivate 2>/dev/null
+  fi
+
+  if [[ -f .venv/bin/activate ]]; then
+    source .venv/bin/activate
+  fi
+}
+
