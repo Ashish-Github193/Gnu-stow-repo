@@ -1,6 +1,6 @@
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		"basedpyright",
+		"pylsp",
 		"lua_ls",
 		"ts_ls",
 		"eslint",
@@ -16,14 +16,14 @@ require("mason-lspconfig").setup({
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Python LSP
-require("lspconfig").basedpyright.setup({
-	capabilities = capabilities,
-	flags = { debounce_text_changes = 150 },
-})
+-- -- Python LSP
+-- require("lspconfig").basedpyright.setup({
+-- 	capabilities = capabilities,
+-- 	flags = { debounce_text_changes = 150 },
+-- })
 
 -- Lua LSP
-require("lspconfig").lua_ls.setup({
+require("lspconfig").pylsp.setup({
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -45,7 +45,7 @@ require("lspconfig").eslint.setup({
 -- Tailwind CSS LSP
 require("lspconfig").tailwindcss.setup({
 	capabilities = capabilities, -- use the same cmp_nvim_lsp capabilities
-	filetypes = { -- only include relevant filetypes
+	filetypes = {             -- only include relevant filetypes
 		"html",
 		"css",
 		"scss",
