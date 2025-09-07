@@ -2,7 +2,7 @@ vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
 vim.cmd("set number")
-vim.cmd("colorscheme unokai")
+vim.cmd("colorscheme tokyonight-night")
 
 vim.o.updatetime = 50
 vim.o.termguicolors = true

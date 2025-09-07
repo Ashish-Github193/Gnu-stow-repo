@@ -19,37 +19,42 @@ require("lazy").setup({
 	},
 	-- FZF native plugin for telescope
 	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "make",
 	},
-	-- Telescope for fuzzy finding
-	{ "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 	-- Filemanger for nvim
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x", -- or tag = "v3.x" if you want a specific release
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons", -- optional but recommended
-		},
+		branch = "v3.x",
+		dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim", "nvim-tree/nvim-web-devicons" },
 	},
 	-- All language formatters
 	{
 		"stevearc/conform.nvim",
 		opts = {},
 	},
+	-- Mason itself
 	{
 		"mason-org/mason.nvim",
 		opts = {},
 	},
+	-- Mason LSP Config
 	{
 		"mason-org/mason-lspconfig.nvim",
-		opts = {},
+		lazy = true, -- defer loading
+		event = { "BufReadPre", "BufNewFile" }, -- load on startup
 		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
-			"neovim/nvim-lspconfig",
+			"mason-org/mason.nvim", -- ensure Mason is available
+			"neovim/nvim-lspconfig", -- lazy load LSP config too
 		},
+		opts = {},
+		config = function()
+			require("mason-lspconfig").setup()
+		end,
 	},
 	{
 		"ojroques/nvim-osc52",
@@ -65,5 +70,11 @@ require("lazy").setup({
 	{
 		"supermaven-inc/supermaven-nvim",
 	},
-	{ "brenoprata10/nvim-highlight-colors" },
+	{
+		"brenoprata10/nvim-highlight-colors",
+	},
+	{
+		"nvimdev/dashboard-nvim",
+	},
+	{ "folke/tokyonight.nvim" },
 })
