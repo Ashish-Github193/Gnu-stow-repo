@@ -1,0 +1,26 @@
+[general]
+session_name = "portmux"
+default_identity = "~/Projects/report-automation/ovh/id_rsa"
+reconnect_delay = 1
+max_retries = 3
+
+[startup]
+auto_execute = true
+commands = [
+    "portmux add L 80:localhost:80 x@164.52.197.206",
+    "portmux add L 3000:localhost:3000 x@164.52.197.206",
+    "portmux add L 8000:localhost:8000 x@164.52.197.206",
+	"portmux add L 5000:localhost:5000 x@164.52.197.206",
+    "portmux add L 6378:localhost:6379 x@164.52.197.206",
+    "portmux add L 6379:localhost:6379 ubuntu@app-dev-pantomath-crm.leadzen.ai"
+]
+
+[profiles.development]
+session_name = "portmux-dev"
+default_identity = "~/Projects/report-automation/ovh/id_rsa"
+commands = []
+
+[profiles.production]
+session_name = "portmux-prod"
+default_identity = "~/Projects/report-automation/ovh/id_rsa"
+commands = []
