@@ -45,16 +45,11 @@ require("lazy").setup({
 	-- Mason LSP Config
 	{
 		"mason-org/mason-lspconfig.nvim",
-		lazy = true, -- defer loading
-		event = { "BufReadPre", "BufNewFile" }, -- load on startup
 		dependencies = {
-			"mason-org/mason.nvim", -- ensure Mason is available
-			"neovim/nvim-lspconfig", -- lazy load LSP config too
+			"mason-org/mason.nvim",
+			"neovim/nvim-lspconfig",
 		},
 		opts = {},
-		config = function()
-			require("mason-lspconfig").setup()
-		end,
 	},
 	{
 		"ojroques/nvim-osc52",

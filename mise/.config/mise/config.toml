@@ -1,9 +1,10 @@
 [tools]
 go = "1.21"
 node = "22"
-python = "3.12.10"
+python = "3.10.18"
 ripgrep = "latest"
 rust = "latest"
+uv = "0.7.18"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]

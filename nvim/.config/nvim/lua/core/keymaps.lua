@@ -7,7 +7,7 @@ end, { desc = "OSC52: Yank visual selection" })
 vim.keymap.set("n", "<C-d>", "yyp", { noremap = true, silent = true })
 
 -- Select all text
-vim.keymap.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>a", "ggVG", { noremap = true, silent = true })
 
 -- Save the current file
 vim.keymap.set("n", "<C-s>", function()
