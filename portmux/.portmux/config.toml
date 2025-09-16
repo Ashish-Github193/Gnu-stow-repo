@@ -1,6 +1,6 @@
 [general]
 session_name = "portmux"
-default_identity = "~/Projects/report-automation/ovh/id_rsa"
+default_identity = "~/Projects/Secrets/decrypts/secret.ssh_keys/ovh.id_rsa"
 reconnect_delay = 1
 max_retries = 3
 
@@ -17,10 +17,10 @@ commands = [
 
 [profiles.development]
 session_name = "portmux-dev"
-default_identity = "~/Projects/report-automation/ovh/id_rsa"
+default_identity = "~/Projects/Secrets/decrypts/secret.ssh_keys/ovh.id_rsa"
 commands = []
 
 [profiles.production]
 session_name = "portmux-prod"
-default_identity = "~/Projects/report-automation/ovh/id_rsa"
+default_identity = "~/Projects/Secrets/decrypts/secret.ssh_keys/ovh.id_rsa"
 commands = []

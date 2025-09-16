@@ -1,8 +1,7 @@
 require("supermaven-nvim").setup({
 	keymaps = {
-		accept_suggestion = "<Tab>",
+		accept_suggestion = "<CR>",
 		clear_suggestion = "<C-]>",
-		accept_word = "<C-j>",
 	},
 	ignore_filetypes = { "help", "TelescopePrompt" },
 	color = {

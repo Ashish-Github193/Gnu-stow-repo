@@ -24,7 +24,7 @@ require("lspconfig").pyright.setup({
 			diagnostics = {
 				globals = { "vim" },
 			},
-		}
+		},
 	},
 })
 
@@ -39,7 +39,7 @@ require("lspconfig").eslint.setup({
 -- Tailwind CSS LSP
 require("lspconfig").tailwindcss.setup({
 	capabilities = capabilities, -- use the same cmp_nvim_lsp capabilities
-	filetypes = {             -- only include relevant filetypes
+	filetypes = { -- only include relevant filetypes
 		"html",
 		"css",
 		"scss",
