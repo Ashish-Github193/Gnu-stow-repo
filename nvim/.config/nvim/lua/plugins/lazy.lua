@@ -12,6 +12,17 @@ require("lazy").setup({
 			"L3MON4D3/LuaSnip", -- snippet engine
 		},
 	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+	},
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup()
+		end,
+	},
 	-- Treesitter for syntax highlighting & code parsing
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -73,4 +84,9 @@ require("lazy").setup({
 	},
 	{ "folke/tokyonight.nvim" },
 	{ "lewis6991/gitsigns.nvim", event = { "BufReadPre", "BufNewFile" } },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+	},
 })

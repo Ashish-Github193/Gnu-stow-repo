@@ -7,6 +7,7 @@ vim.cmd("colorscheme tokyonight-night")
 vim.o.updatetime = 50
 vim.o.termguicolors = true
 vim.o.cmdheight = 0
+vim.opt.number = true -- absolute line numbers
 
 -- Undotree options
 vim.g.undotree_WindowLayout = 2

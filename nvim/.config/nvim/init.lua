@@ -10,6 +10,8 @@ require("mason-lspconfig")
 require("plugins.nvim-highlights")
 require("plugins.neotree")
 require("plugins.gitsigns")
+require("plugins.autopairs")
+require("plugins.indent")
 -- require("plugins.supermaven")
 
 require("core.options")
