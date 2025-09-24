@@ -72,4 +72,5 @@ require("lazy").setup({
 		"nvimdev/dashboard-nvim",
 	},
 	{ "folke/tokyonight.nvim" },
+	{ "lewis6991/gitsigns.nvim", event = { "BufReadPre", "BufNewFile" } },
 })
