@@ -1,8 +1,8 @@
 require("gitsigns").setup({
 	signcolumn = true, -- show signs in the sign column
-	numhl = true, -- disable number highlight
+	numhl = true,   -- disable number highlight
 	linehl = false, -- disable line highlight
-	word_diff = true, -- disable word diff
+	word_diff = false, -- disable word diff
 	watch_gitdir = {
 		follow_files = true,
 	},
