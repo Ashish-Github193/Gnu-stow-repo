@@ -130,6 +130,7 @@ alias ga='git add'
 alias gc='git commit -m'
 alias gsc='claude "commit all the staged changes and if version file present bump the version as per semver 2.0" && git push'
 alias gp='git push'
+alias gs='git status'
 alias gbs='git branch | sed "s/^..//" | fzf | xargs git checkout'
 alias gbd='git branch --format="%(refname:short)" | fzf | xargs git branch -d'
 alias gwa='branch=$(git branch --format="%(refname:short)" | fzf) \
@@ -210,13 +211,7 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 eval "$(uv generate-shell-completion zsh)"
 
-
-# bun completions
-[ -s "/home/x/.bun/_bun" ] && source "/home/x/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export DISABLE_AUTO_TITLE='true'
 
 cd() {
   builtin cd "$@" || return
