@@ -10,7 +10,9 @@ commands = [
     "portmux add L 80:localhost:80 x@164.52.197.206",
     "portmux add L 3000:localhost:3000 x@164.52.197.206",
     "portmux add L 8000:localhost:8000 x@164.52.197.206",
+    "portmux add L 8006:localhost:8006 x@164.52.197.206",
 	"portmux add L 5000:localhost:5000 x@164.52.197.206",
+	"portmux add L 5003:localhost:5003 x@164.52.197.206",
     "portmux add L 6378:localhost:6379 x@164.52.197.206",
     "portmux add L 6379:localhost:6379 ubuntu@app-dev-pantomath-crm.leadzen.ai"
 ]
