@@ -139,30 +139,15 @@ alias gwl='git worktree list | fzf --preview "git -C {1} status"'
 
 # utils
 alias tmux='tmux -u'
-alias ls='exa --long'
+alias ls='eza --long'
 alias lg='lazygit'
 alias ld='lazydocker'
 
 export PATH=$HOME/.local/bin:$PATH
 
-eval "$(mise activate zsh)"
-
 # Define installation folder path as a variable
 NVIM_INSTALL_DIR="/opt/nvim-linux-x86_64"
-
-# Check if nvim is installed in the specified folder
-if [ ! -f "$NVIM_INSTALL_DIR/bin/nvim" ]; then
-    echo "nvim is not found, installing..."
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-    sudo rm -rf $NVIM_INSTALL_DIR
-    sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-    echo "nvim installed at $NVIM_INSTALL_DIR"
-fi
-
-# Ensure nvim is added to PATH only once
-if ! echo $PATH | grep -q "$NVIM_INSTALL_DIR/bin"; then
-    export PATH="$PATH:$NVIM_INSTALL_DIR/bin"
-fi
+export PATH="$PATH:$NVIM_INSTALL_DIR/bin"
 
 # File Descriptor Limit
 ulimit -n 65536
@@ -171,45 +156,34 @@ ulimit -n 65536
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-
-GNU_STOW_GIT_REPO_PATH=~/Projects/Gnu-stow-repo
-
-# Skip if git is not installed
-command -v git >/dev/null || return
 # Skip if repo path does not exist or is not a git repo
+GNU_STOW_GIT_REPO_PATH=~/Projects/Gnu-stow-repo
 [[ -d "$GNU_STOW_GIT_REPO_PATH/.git" ]] || return
+
 # Check for uncommitted changes
-if git -C "$GNU_STOW_GIT_REPO_PATH" diff --quiet && git -C "$GNU_STOW_GIT_REPO_PATH" diff --staged --quiet; then
-    # No uncommitted changes → Display a fortune message
-    if command -v fortune &>/dev/null && command -v cowsay &>/dev/null; then
-        fortune | cowsay
-    fi
-else
-    # Uncommitted changes exist → Display a funny warning
-    if command -v cowsay &>/dev/null; then
-        echo "\uf071 Your repo is a mess! Commit your changes!" | cowsay
-    else
-        echo "Uncommitted changes exist in $GNU_STOW_GIT_REPO_PATH"
-    fi
+if ! git -C "$GNU_STOW_GIT_REPO_PATH" diff --quiet \
+   || ! git -C "$GNU_STOW_GIT_REPO_PATH" diff --staged --quiet; then
+    echo "Uncommitted changes exist in $GNU_STOW_GIT_REPO_PATH"
 fi
 
-# sources
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [ -f ~/.env ]; then
-	set -a && source ~/.env && set +a
+# Fortune and Cowsay
+if command -v fortune &>/dev/null && command -v cowsay &>/dev/null; then 
+	fortune | cowsay
 fi
 
 # SSH agent socket
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
+# Enable mise in zsh
+eval "$(mise activate zsh)"
+
+# Enable uv shell completion
+export DISABLE_AUTO_TITLE='true'
+eval "$(uv generate-shell-completion zsh)"
+
 # Export paths
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
-
-eval "$(uv generate-shell-completion zsh)"
-
-export DISABLE_AUTO_TITLE='true'
 
 cd() {
   builtin cd "$@" || return
@@ -222,7 +196,6 @@ cd() {
     source .venv/bin/activate
   fi
 }
-
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -246,6 +219,5 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust \
     zsh-users/zsh-completions \
     zsh-users/zsh-autosuggestions \
-    zdharma-continuum/zinit-annex-rust
-
+	zdharma-continuum/fast-syntax-highlighting
 ### End of Zinit's installer chunk
