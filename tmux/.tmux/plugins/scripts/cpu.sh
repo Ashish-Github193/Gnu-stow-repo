@@ -13,7 +13,7 @@ done
 # Continuous CPU usage monitoring
 while true; do
     usage=$(mpstat 1 1 | awk '/all/ {usage=100 - $NF} END {print usage}')
-    echo "🧠 $usage%"
+    echo "CPU Avg: $usage%"
     sleep "$interval"
 done
 
