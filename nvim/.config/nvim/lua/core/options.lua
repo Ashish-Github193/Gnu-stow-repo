@@ -21,3 +21,10 @@ vim.diagnostic.config({
 	virtual_text = false,
 	float = { "always" },
 })
+
+-- Folding (nvim-ufo)
+vim.o.foldcolumn = "1"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.o.fillchars = [[eob: ,fold: ,foldopen:▾,foldsep: ,foldclose:▸]]

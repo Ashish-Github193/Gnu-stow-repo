@@ -1,3 +1,20 @@
+-- LSP keybindings via LspAttach (replaces per-server on_attach)
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		local opts = function(desc)
+			return { buffer = ev.buf, desc = desc }
+		end
+		vim.keymap.set("n", "<C-k>", vim.lsp.buf.hover, opts("Hover docs"))
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover docs"))
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename symbol"))
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
+	end,
+})
+
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"pyright",
@@ -11,14 +28,16 @@ require("mason-lspconfig").setup({
 		"jsonls",
 		"tailwindcss",
 	},
-	automatic_installation = true,
+	automatic_enable = true,
 })
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- Global capabilities for all servers
+vim.lsp.config("*", {
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
 
--- Lua LSP
-require("lspconfig").pyright.setup({
-	capabilities = capabilities,
+-- Per-server overrides
+vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -28,18 +47,8 @@ require("lspconfig").pyright.setup({
 	},
 })
 
--- TypeScript/JavaScript LSP
-require("lspconfig").ts_ls.setup({
-	capabilities = capabilities,
-})
--- ESLint LSP
-require("lspconfig").eslint.setup({
-	capabilities = capabilities,
-})
--- Tailwind CSS LSP
-require("lspconfig").tailwindcss.setup({
-	capabilities = capabilities, -- use the same cmp_nvim_lsp capabilities
-	filetypes = { -- only include relevant filetypes
+vim.lsp.config("tailwindcss", {
+	filetypes = {
 		"html",
 		"css",
 		"scss",
@@ -49,24 +58,4 @@ require("lspconfig").tailwindcss.setup({
 		"typescriptreact",
 		"vue",
 	},
-})
--- Docker LSP
-require("lspconfig").dockerls.setup({
-	capabilities = capabilities,
-})
--- Docker Compose LSP
-require("lspconfig").docker_compose_language_service.setup({
-	capabilities = capabilities,
-})
--- YAML LSP
-require("lspconfig").yamlls.setup({
-	capabilities = capabilities,
-})
--- Bash LSP
-require("lspconfig").bashls.setup({
-	capabilities = capabilities,
-})
--- JSON LSP
-require("lspconfig").jsonls.setup({
-	capabilities = capabilities,
 })

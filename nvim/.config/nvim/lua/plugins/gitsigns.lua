@@ -30,7 +30,7 @@ require("gitsigns").setup({
 		map("n", "<leader>gp", gs.preview_hunk)
 
 		-- Toggle blame (if needed later)
-		map("n", "<leader>gb", function()
+		map("n", "<leader>gB", function()
 			gs.blame_line({ full = true })
 		end)
 	end,

@@ -72,10 +72,6 @@ require("lazy").setup({
 	{
 		"mbbill/undotree",
 	},
-	-- AI code completion
-	{
-		"supermaven-inc/supermaven-nvim",
-	},
 	{
 		"brenoprata10/nvim-highlight-colors",
 	},
@@ -87,6 +83,17 @@ require("lazy").setup({
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
+		opts = {},
+	},
+	{ "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+	},
+	{
+		"linux-cultist/venv-selector.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		event = "VeryLazy",
 		opts = {},
 	},
 })
