@@ -143,6 +143,19 @@ alias ls='eza --long'
 alias lg='lazygit'
 alias ld='lazydocker'
 
+prmsg() {
+  local content=$(git log master..HEAD --pretty=format:"- %s%n%b" | grep -v '^$')
+  
+  if [[ "$1" == "-s" || "$1" == "--silent" ]]; then
+    # Silent mode - only copy to clipboard
+    printf "\033]52;c;$(printf '%s' "$content" | base64 | tr -d '\n')\a"
+    echo "✓ Copied to clipboard"
+  else
+    # Default - just print
+    echo "$content"
+  fi
+}
+
 export PATH=$HOME/.local/bin:$PATH
 
 # Define installation folder path as a variable

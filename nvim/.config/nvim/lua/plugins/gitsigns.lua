@@ -24,7 +24,13 @@ require("gitsigns").setup({
 
 		-- Actions: stage/reset
 		map("n", "<leader>gs", gs.stage_hunk)
+		map("v", "<leader>gs", function()
+			gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+		end)
 		map("n", "<leader>gr", gs.reset_hunk)
+		map("v", "<leader>gr", function()
+			gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+		end)
 
 		-- Preview diff for hunk
 		map("n", "<leader>gp", gs.preview_hunk)
