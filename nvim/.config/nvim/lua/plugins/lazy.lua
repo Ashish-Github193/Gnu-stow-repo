@@ -51,7 +51,9 @@ require("lazy").setup({
 	-- Mason itself
 	{
 		"mason-org/mason.nvim",
-		opts = {},
+		config = function()
+			require("plugins.mason")
+		end,
 	},
 	-- Mason LSP Config
 	{
