@@ -11,15 +11,16 @@ require("conform").setup({
 		css = { "prettierd", "prettier", stop_after_first = true },
 		scss = { "prettierd", "prettier", stop_after_first = true },
 		html = { "prettierd", "prettier", stop_after_first = true },
-		yaml = { "prettierd", "prettier", stop_after_first = true },
-		yml = { "prettierd", "prettier", stop_after_first = true },
+		yaml = { "prettierd", stop_after_first = true },
+		yml = { "prettierd", stop_after_first = true },
 		markdown = { "prettierd", "prettier", stop_after_first = true },
 		dockerfile = { "prettierd", "prettier", stop_after_first = true },
 		sh = { "shfmt" },
 		bash = { "shfmt" },
+		toml = { "taplo" },
 	},
 	format_on_save = {
-		timeout_ms = 500, -- stop if formatting takes longer than 500ms
-		lsp_format = "fallback", -- use LSP format if available, else fall back to other formatters
+		timeout_ms = 500,
+		lsp_format = "fallback",
 	},
 })
