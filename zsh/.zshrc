@@ -140,6 +140,7 @@ alias gwl='git worktree list | fzf --preview "git -C {1} status"'
 # utils
 alias tmux='tmux -u'
 alias ls='eza --long'
+alias xo='xdg-open'
 alias lg='lazygit'
 alias ld='lazydocker'
 

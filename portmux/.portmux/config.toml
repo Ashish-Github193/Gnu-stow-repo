@@ -1,30 +1,29 @@
 [general]
 session_name = "portmux"
-default_identity = "~/Projects/Secrets/decrypts/secret.ssh_keys/ovh.id_rsa"
-reconnect_delay = 1
-max_retries = 3
+default_identity = "~/Projects/Secrets/secrets/secret.ssh_keys/bastion/id_rsa"
+# reconnect_delay = 1
+# max_retries = 3
+
+# [monitor]
+# enabled = true
+# check_interval = 10
+# auto_reconnect = true
 
 [startup]
 auto_execute = true
 commands = [
-    "portmux add L 3000:localhost:3000 x@164.52.197.206",
-    "portmux add L 3001:localhost:3001 x@164.52.197.206",
-    "portmux add L 3080:localhost:3080 x@164.52.197.206",
-    "portmux add L 13000:localhost:13000 x@164.52.197.206",
-	"portmux add L 8000:localhost:8000 x@164.52.197.206",
-	   "portmux add L 8006:localhost:8006 x@164.52.197.206",
-	   "portmux add L 8080:localhost:8080 x@164.52.197.206",
-	"portmux add L 5000:localhost:5000 x@164.52.197.206",
-	"portmux add L 5003:localhost:5003 x@164.52.197.206",
-	   "portmux add L 6378:localhost:6379 x@164.52.197.206",
+    "portmux add L 80:localhost:80 x@sandbox",
+    "portmux add L 3000:localhost:3000 x@sandbox",
+    "portmux add L 8000:localhost:8000 x@sandbox",
+    "portmux add L 8080:localhost:8080 x@sandbox",
 ]
 
 [profiles.development]
 session_name = "portmux-dev"
-default_identity = "~/Projects/Secrets/decrypts/secret.ssh_keys/ovh.id_rsa"
+default_identity = "~/Projects/Secrets/secrets/secret.ssh_keys/bastion/id_rsa"
 commands = []
 
 [profiles.production]
 session_name = "portmux-prod"
-default_identity = "~/Projects/Secrets/decrypts/secret.ssh_keys/ovh.id_rsa"
+default_identity = "~/Projects/Secrets/secrets/secret.ssh_keys/bastion/id_rsa"
 commands = []
