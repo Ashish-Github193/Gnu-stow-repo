@@ -1,21 +1,21 @@
 [general]
 session_name = "portmux"
 default_identity = "~/Projects/Secrets/secrets/secret.ssh_keys/bastion/id_rsa"
-# reconnect_delay = 1
-# max_retries = 3
+reconnect_delay = 1
+max_retries = 3
 
-# [monitor]
-# enabled = true
-# check_interval = 10
-# auto_reconnect = true
+[monitor]
+enabled = true
+check_interval = 5
+auto_reconnect = true
 
 [startup]
 auto_execute = true
 commands = [
-    "portmux add L 80:localhost:80 x@sandbox",
-    "portmux add L 3000:localhost:3000 x@sandbox",
-    "portmux add L 8000:localhost:8000 x@sandbox",
-    "portmux add L 8080:localhost:8080 x@sandbox",
+  "portmux add L 80:localhost:80 x@sandbox",
+  "portmux add L 3000:localhost:3000 x@sandbox",
+  "portmux add L 8000:localhost:8000 x@sandbox",
+  "portmux add L 8080:localhost:8080 x@sandbox",
 ]
 
 [profiles.development]
