@@ -26,7 +26,7 @@ require("lazy").setup({
 	-- Treesitter for syntax highlighting & code parsing
 	{
 		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
+		build = ":TSUpdate",
 	},
 	-- FZF native plugin for telescope
 	{
@@ -97,5 +97,15 @@ require("lazy").setup({
 		dependencies = { "nvim-telescope/telescope.nvim" },
 		event = "VeryLazy",
 		opts = {},
+	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown" },
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		opts = {
+			html = { enabled = false },
+			latex = { enabled = false },
+			yaml = { enabled = false },
+		},
 	},
 })
