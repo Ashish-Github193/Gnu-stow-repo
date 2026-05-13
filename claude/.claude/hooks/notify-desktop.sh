@@ -52,8 +52,24 @@ else
 	msg="Claude Code"
 fi
 
-if [ -n "$TMUX" ]; then
-	printf '\033Ptmux;\033\033]9;%s\a\033\\' "$msg" > /dev/tty
-else
-	printf '\033]9;%s\a' "$msg" > /dev/tty
+# Desktop notification rides OSC 9 escape through tmux passthrough → SSH → kitty.
+# /dev/tty is unreliable from a detached hook process (Claude Code regression
+# ~early May 2026 stopped giving hooks a controlling terminal), so resolve the
+# active tmux pane's TTY directly instead.
+target_tty=""
+if [ -n "$TMUX" ] && command -v tmux &>/dev/null; then
+	target_tty=$(tmux display-message -p '#{pane_tty}' 2>/dev/null)
 fi
+if [ -z "$target_tty" ] && { : > /dev/tty; } 2>/dev/null; then
+	target_tty="/dev/tty"
+fi
+
+if [ -n "$target_tty" ] && [ -w "$target_tty" ]; then
+	if [ -n "$TMUX" ]; then
+		printf '\033Ptmux;\033\033]9;%s\a\033\\' "$msg" > "$target_tty" 2>/dev/null || true
+	else
+		printf '\033]9;%s\a' "$msg" > "$target_tty" 2>/dev/null || true
+	fi
+fi
+
+exit 0
