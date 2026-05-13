@@ -10,10 +10,9 @@ for arg in "$@"; do
     esac
 done
 
-# Continuous CPU usage monitoring
+# Continuous memory usage monitoring
 while true; do
-    usage=$(mpstat 1 1 | awk '/all/ {usage=100 - $NF} END {print usage}')
-    echo "C: $usage%"
+    usage=$(free | awk '/^Mem:/ {printf "%.1f", $3/$2 * 100}')
+    echo "M: $usage%"
     sleep "$interval"
 done
-
