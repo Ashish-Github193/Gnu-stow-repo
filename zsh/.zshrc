@@ -1,136 +1,159 @@
+# ~/.zshrc — managed via GNU stow (Gnu-stow-repo/zsh)
+#
+# Plugin management: Zinit (see the Zinit section near the bottom).
+# Oh My Zsh was removed on 2026-08-24 to fix ~1s startup (it re-ran the
+# completion system on every launch). The behavior we actually used from it
+# — the robbyrussell prompt, history/dir setopts, keybindings, and
+# completion styling — is reimplemented natively below with no dependency.
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# Optional startup timing: `export ZSH_STARTUP_TIME=1` to print how long the
+# shell took to reach the first prompt. (There's no standard env var for this,
+# so this is our own toggle.)
+# Terminal colors as literal ANSI escapes — no `tput` forks (15 subprocesses
+# added ~90ms to startup). Values match `tput` on xterm/tmux-256color.
+zmodload zsh/datetime 2>/dev/null
+[[ -n ${ZSH_STARTUP_TIME:-} ]] && _zshrc_start_time=$EPOCHREALTIME
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Startup profiling: when ZSH_STARTUP_TIME is set, `_zmark <label>` prints the
+# time since the previous checkpoint and the running total, so you can see which
+# section below is slow. No-op when the toggle is off.
+if [[ -n ${_zshrc_start_time:-} ]]; then
+  typeset -F _zmark_last=$_zshrc_start_time
+  _zmark() {
+    local now=$EPOCHREALTIME
+    printf '  [zshrc] %-14s +%6.1f ms   (total %6.1f ms)\n' "$1" \
+      $(( (now - _zmark_last) * 1000 )) $(( (now - _zshrc_start_time) * 1000 ))
+    _zmark_last=$now
+  }
+else
+  _zmark() { : }
+fi
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# ============================================================================
+# Shell options (replaces Oh My Zsh lib/{history,directories,completion}.zsh)
+# ============================================================================
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# History
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
+setopt extended_history        # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first  # delete dups first when HISTFILE exceeds HISTSIZE
+setopt hist_ignore_dups        # ignore duplicated commands in the history list
+setopt hist_ignore_space       # ignore commands that start with a space
+setopt hist_verify             # show expanded history line before running it
+setopt share_history           # share history live across all sessions
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# Directories
+setopt auto_pushd              # cd pushes onto the dir stack (1-9 to jump back)
+setopt pushd_ignore_dups
+setopt pushdminus
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+# Completion behavior
+setopt auto_menu               # show completion menu on repeated tab
+setopt complete_in_word
+setopt always_to_end
+unsetopt menu_complete
+unsetopt flowcontrol
+WORDCHARS=''
+_zmark shell-opts
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# ============================================================================
+# Prompt — robbyrussell, self-contained (replaces the Oh My Zsh theme)
+# ============================================================================
+autoload -Uz colors && colors
+setopt prompt_subst
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# Prompt: robbyrussell style, git segment removed (the old git_prompt_info
+# forked two git processes on every render). Set explicitly so we never inherit
+# a stale exported PS1 from a parent shell, and unexport it so it can't leak
+# into child shells.
+PROMPT="%(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) %{$fg[cyan]%}%c%{$reset_color%} "
+typeset +x PROMPT PS1
+_zmark prompt
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+_zmark keybindings
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker-status)
-
-source $ZSH/oh-my-zsh.sh
-
-# On-demand rehash
-zshcache_time="$(date +%s%N)"
-
+# add-zsh-hook is used by the startup timer at the bottom of this file
 autoload -Uz add-zsh-hook
 
-rehash_precmd() {
-  if [[ -a /var/cache/zsh/pacman ]]; then
-    local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
-    if (( zshcache_time < paccache_time )); then
-      rehash
-      zshcache_time="$paccache_time"
-    fi
-  fi
-}
+# ============================================================================
+# Completion + Zinit plugin manager
+# ============================================================================
+# Completion styling (replaces Oh My Zsh lib/completion.zsh)
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 
-add-zsh-hook -Uz precmd rehash_precmd
+# Extra completion functions on fpath (must be set before compinit below)
+fpath=("/home/x/.local/share/zsh/site-functions" $fpath)
+_zmark comp-styles
 
-# User configuration
+# Bootstrap Zinit
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
 
-# export MANPATH="/usr/local/man:$MANPATH"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+_zmark zinit-source
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# Load extra completions (blockf), then run a single cached compinit. This must
+# run HERE — before tools like mise/uv register completions via `compdef` later
+# in this file — otherwise `compdef` is undefined. Fast path (-C) unless the
+# dump is older than 24h.
+zinit ice blockf
+zinit light zsh-users/zsh-completions
+autoload -Uz compinit
+_zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -n ${_zcompdump}(#qNmh-24) ]]; then
+  compinit -C -d "$_zcompdump"
+else
+  compinit -d "$_zcompdump"
+fi
+# Compile the dump to wordcode so zsh loads bytecode instead of re-parsing the
+# ~52KB text dump. Guarded: only runs when the .zwc is missing or stale, and
+# since `compinit -C` doesn't rewrite the dump this fires ~once a day, not per
+# shell (proven: dump mtime stays constant across warm startups).
+if [[ ! -s ${_zcompdump}.zwc || $_zcompdump -nt ${_zcompdump}.zwc ]]; then
+  zcompile -R -- "$_zcompdump"
+fi
+unset _zcompdump
+zinit cdreplay -q   # replay compdefs captured by blockf
+_zmark compinit
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+# ZLE-heavy plugins deferred via Turbo (`wait lucid`) so the prompt appears
+# instantly and these load a few ms later in the background.
+zinit wait lucid for \
+    atload"!_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+    zdharma-continuum/fast-syntax-highlighting
+_zmark turbo-reg
 
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# ============================================================================
+# Aliases
+# ============================================================================
 
 # git
-alias gcl='git clone --depth 1'
-alias gi='git init'
 alias ga='git add'
 alias gc='git commit -m'
-alias gsc='claude "commit all the staged changes and if version file present bump the version as per semver 2.0 without making any amends" && git push'
 alias gp='git push'
 alias gs='git status'
+alias gss='git status --short'
 alias gl="git log"
-alias git-whatchanged='git log'
-alias gbs='git branch | sed "s/^..//" | fzf | xargs git checkout'
-alias gbd='git branch --format="%(refname:short)" | fzf | xargs git branch -d'
 alias gwa='branch=$(git branch --format="%(refname:short)" | fzf) \
 	&& read "newPath?New worktree path: " \
 	&& git worktree add "$newPath" "$branch"'
@@ -147,7 +170,7 @@ alias icat='kitty +kitten icat'
 
 prmsg() {
   local content=$(git log master..HEAD --pretty=format:"- %s%n%b" | grep -v '^$')
-  
+
   if [[ "$1" == "-s" || "$1" == "--silent" ]]; then
     # Silent mode - only copy to clipboard
     printf "\033]52;c;$(printf '%s' "$content" | base64 | tr -d '\n')\a"
@@ -157,7 +180,11 @@ prmsg() {
     echo "$content"
   fi
 }
+_zmark aliases
 
+# ============================================================================
+# Environment
+# ============================================================================
 export PATH=$HOME/.local/bin:$PATH
 
 # Define installation folder path as a variable
@@ -171,68 +198,44 @@ ulimit -n 65536
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Skip if repo path does not exist or is not a git repo
-GNU_STOW_GIT_REPO_PATH=~/Projects/Gnu-stow-repo
-[[ -d "$GNU_STOW_GIT_REPO_PATH/.git" ]] || return
-
-# Check for uncommitted changes
-if ! git -C "$GNU_STOW_GIT_REPO_PATH" diff --quiet \
-   || ! git -C "$GNU_STOW_GIT_REPO_PATH" diff --staged --quiet; then
-    echo "Uncommitted changes exist in $GNU_STOW_GIT_REPO_PATH"
-fi
-
-# Fortune and Cowsay
-if command -v fortune &>/dev/null && command -v cowsay &>/dev/null; then 
-	fortune | cowsay
-fi
-
 # SSH agent socket
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+_zmark env
 
-# Enable mise in zsh
-eval "$(mise activate zsh)"
-
-# Enable uv shell completion
-export DISABLE_AUTO_TITLE='true'
-eval "$(uv generate-shell-completion zsh)"
-
-# Export paths
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-
-cd() {
-  builtin cd "$@" || return
-
-  if [[ -n "$VIRTUAL_ENV" ]]; then
-    deactivate 2>/dev/null
+# Enable mise (full activation). The activation script is cached and only
+# regenerated when the mise binary changes, so we don't fork `mise activate`
+# on every launch. compinit runs above (synchronously) so mise's `compdef`
+# call works. Note: mise still runs `mise hook-env` per prompt (~50-60ms) —
+# that's inherent to activate mode and provides per-directory env switching.
+if command -v mise &>/dev/null; then
+  _mise_cache="${XDG_CACHE_HOME:-$HOME/.cache}/mise-activate.zsh"
+  if [[ ! -s $_mise_cache || $_mise_cache -ot ${commands[mise]} ]]; then
+    mise activate zsh >| $_mise_cache
   fi
-
-  if [[ -f .venv/bin/activate ]]; then
-    source .venv/bin/activate
-  fi
-}
-
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
+  source $_mise_cache
+  unset _mise_cache
 fi
+_zmark mise
 
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+export DISABLE_AUTO_TITLE='true'
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust \
-    zsh-users/zsh-completions \
-    zsh-users/zsh-autosuggestions \
-	zdharma-continuum/fast-syntax-highlighting
-### End of Zinit's installer chunk
+# Export paths (mise shims; $HOME/.local/bin is already on PATH near the top)
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+_zmark end-of-file
+
+# ============================================================================
+# Misc
+# ============================================================================
+# Report startup time once, at the first prompt (enabled by ZSH_STARTUP_TIME).
+if [[ -n ${_zshrc_start_time:-} ]]; then
+  _zshrc_report_startup() {
+    startup_ms=$(( (EPOCHREALTIME - _zshrc_start_time) * 1000 ))
+	startup_time=$(printf 'zsh startup time: %.0f ms' "$startup_ms")
+	echo "$startup_time"
+
+    add-zsh-hook -d precmd _zshrc_report_startup
+    unset _zshrc_start_time
+    unfunction _zshrc_report_startup
+  }
+  add-zsh-hook precmd _zshrc_report_startup
+fi
