@@ -154,6 +154,7 @@ alias gp='git push'
 alias gs='git status'
 alias gss='git status --short'
 alias gl="git log"
+alias gitroot='cd "$(git rev-parse --show-toplevel)"'
 alias gwa='branch=$(git branch --format="%(refname:short)" | fzf) \
 	&& read "newPath?New worktree path: " \
 	&& git worktree add "$newPath" "$branch"'
@@ -239,3 +240,16 @@ if [[ -n ${_zshrc_start_time:-} ]]; then
   }
   add-zsh-hook precmd _zshrc_report_startup
 fi
+
+claude_qwen() {
+  ANTHROPIC_BASE_URL="https://openrouter.ai/api" \
+  ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY" \
+  ANTHROPIC_API_KEY="" \
+  ANTHROPIC_DEFAULT_SONNET_MODEL="qwen/qwen3.8-27b:free" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL="qwen/qwen3.8-27b:free" \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="qwen/qwen3.8-27b:free" \
+  claude "$@"
+}
+
+fpath=(/home/x/.zsh/completions $fpath)
+autoload -Uz compinit && compinit

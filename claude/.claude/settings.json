@@ -1,4 +1,8 @@
 {
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "opus",
   "hooks": {
     "Stop": [
       {
@@ -23,9 +27,15 @@
       }
     ]
   },
+  "enabledPlugins": {
+    "code-simplifier@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "tui": "fullscreen",
   "theme": "dark-daltonized",
-  "verbose": true,
+  "verbose": false,
+  "preferredNotifChannel": "iterm2",
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "tui": "fullscreen"
+  "skipWorkflowUsageWarning": true
 }
