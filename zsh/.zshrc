@@ -143,6 +143,7 @@ alias ls='eza --long'
 alias xo='xdg-open'
 alias lg='lazygit'
 alias ld='lazydocker'
+alias icat='kitty +kitten icat'
 
 prmsg() {
   local content=$(git log master..HEAD --pretty=format:"- %s%n%b" | grep -v '^$')

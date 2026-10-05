@@ -12,10 +12,9 @@ auto_reconnect = true
 [startup]
 auto_execute = true
 commands = [
-  "portmux add L 80:localhost:80 x@sandbox",
-  "portmux add L 3000:localhost:3000 x@sandbox",
-  "portmux add L 8000:localhost:8000 x@sandbox",
-  "portmux add L 8080:localhost:8080 x@sandbox",
+  "portmux add L 3000:localhost:3000 x@newbox",
+  "portmux add L 8000:localhost:8000 x@newbox",
+  "portmux add R 43022:localhost:22 x@newbox",
 ]
 
 [profiles.development]
