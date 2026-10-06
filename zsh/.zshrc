@@ -94,7 +94,7 @@ zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 
 # Extra completion functions on fpath (must be set before compinit below)
-fpath=("/home/x/.local/share/zsh/site-functions" $fpath)
+fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
 _zmark comp-styles
 
 # Bootstrap Zinit
@@ -251,5 +251,5 @@ claude_qwen() {
   claude "$@"
 }
 
-fpath=(/home/x/.zsh/completions $fpath)
+fpath=("$HOME/.zsh/completions" $fpath)
 autoload -Uz compinit && compinit
